@@ -12,8 +12,10 @@
 
 module.exports = {
   siteMetadata: {
-    title: `gatsby3-portfolio-site`,
-    siteUrl: `https://www.yourdomain.tld`
+    title: `Sebastian Gertz`,
+    siteUrl: `https://www.sebastiangertz.com`,
+    description: 'Personal blog and portfolio site',
+    image: '👨🏻‍💻'
   },
   plugins: [{
     resolve: 'gatsby-source-contentful',

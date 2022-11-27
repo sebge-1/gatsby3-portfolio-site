@@ -1,15 +1,19 @@
 import "../stylesheets/index.scss"
 
 import React from "react";
-import Head from "../components/head";
+import { SEO } from "../components/SEO"
 
 export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Head title="Home"></Head>
         <h1>Hello</h1>
       </>
     )
   }
 }
+
+
+export const Head = () => (
+  <SEO title="Home" />
+)

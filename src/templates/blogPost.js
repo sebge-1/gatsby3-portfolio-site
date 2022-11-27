@@ -1,19 +1,19 @@
 import React from 'react'
 import { graphql} from "gatsby";
-import GatsbyImage from "gatsby-plugin-image";
+import {GatsbyImage, getImage} from "gatsby-plugin-image";
 import { BLOCKS, MARKS } from '@contentful/rich-text-types';
 import Disqus from 'disqus-react';
-import {documentToReactComponents} from '@contentful/rich-text-react-renderer';
 import Highlight from 'react-highlight';
+import { renderRichText } from "gatsby-source-contentful/rich-text"
+import "../assets/monokai.css";
+
 
 export const query = graphql`
   query($slug: String!) {
     contentfulBlogPost(slug: {eq: $slug}) {
       title
       heroImage {
-        fluid {
-        ...GatsbyContentfulFluid
-        }
+        gatsbyImageData
       }
       tldr {
         internal {
@@ -22,12 +22,12 @@ export const query = graphql`
       }
       publishedDate(formatString: "MMMM Do, YYYY")
       content {
-        json
+        raw 
       }
     }
   } 
 `
-const Blog = (props) => {
+const BlogPost = (props) => {
   const disqusShortname = 'sebastiangertz';
   const disqusConfig = {
       url: props.data.contentfulBlogPost.slug,
@@ -48,18 +48,18 @@ const Blog = (props) => {
     },
     renderNode: {
       "embedded-asset-block": node => {
-        const alt = node.data.target.fields.title['en-US'];
-        const url = node.data.target.fields.file['en-US'].url;
+        const alt = node.data.target.title['en-US'];
+        const url = node.data.target.file['en-US'].url;
         return <img alt={alt} src={url} style={{maxWidth: '100%',
           height: 'auto'}}/>
       },
       [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
     }
   }
+  const image = getImage(props.data.contentfulBlogPost.heroImage)
 
   return (
     <>
-      <Head title={props.data.contentfulBlogPost.title} />
       <div style={{padding: '50px', textAlign: 'left'}}>	
         <div>        
           <h1>{props.data.contentfulBlogPost.title}</h1>
@@ -68,15 +68,15 @@ const Blog = (props) => {
           { 
             props.data.contentfulBlogPost.heroImage && 
             <GatsbyImage 
-              fluid={props.data.contentfulBlogPost.heroImage.fluid} 
+              image={image} 
               style={{maxWidth: '70%', height: 'auto'}}
             />
           }
-        {documentToReactComponents(props.data.contentfulBlogPost.content.json, options)}
+        <div>{props.data.contentfulBlogPost && renderRichText(props.data.contentfulBlogPost.content, options)}</div>
         <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
       </div>
     </>
   )
 }
 
-export default Blog
+export default BlogPost

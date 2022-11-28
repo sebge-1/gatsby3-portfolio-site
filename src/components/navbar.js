@@ -12,9 +12,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from '@mui/material'
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Blog', 'Projects'];
+const navItems = [
+    { displayName: 'Home', slug: '/' }, 
+    { displayName: 'Blog', slug: '/blog' },
+    { displayName: 'Projects', slug: '/projects' }
+];
 
 export default function DrawerAppBar(props) {
   const { window } = props;
@@ -32,11 +37,13 @@ export default function DrawerAppBar(props) {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
+            <ListItem key={item.slug} disablePadding>
+                <Link href={item.slug}>
+                    <ListItemButton sx={{ textAlign: 'center' }}>
+                        <ListItemText primary={item.displayName} />
+                    </ListItemButton>
+                </Link>
+            </ListItem>
         ))}
       </List>
     </Box>
@@ -66,10 +73,12 @@ export default function DrawerAppBar(props) {
 
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
+                      {navItems.map((item) => (
+            <Link href={item.slug} key={item.slug}>
+                <Button key={item.slug} sx={{ color: '#fff' }}>
+                    {item.displayName}
+                </Button>
+            </Link>
             ))}
           </Box>
         </Toolbar>

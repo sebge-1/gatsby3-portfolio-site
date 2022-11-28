@@ -6,6 +6,8 @@ import Disqus from 'disqus-react';
 import Highlight from 'react-highlight';
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import "../assets/monokai.css";
+import { Container } from '@mui/material';
+
 
 
 export const query = graphql`
@@ -59,7 +61,7 @@ const BlogPost = (props) => {
   const image = getImage(props.data.contentfulBlogPost.heroImage)
 
   return (
-    <>
+    <Container>
       <div style={{padding: '50px', textAlign: 'left'}}>	
         <div>        
           <h1>{props.data.contentfulBlogPost.title}</h1>
@@ -75,7 +77,7 @@ const BlogPost = (props) => {
         <div>{props.data.contentfulBlogPost && renderRichText(props.data.contentfulBlogPost.content, options)}</div>
         <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
       </div>
-    </>
+    </Container>
   )
 }
 

@@ -7,8 +7,7 @@ import Highlight from 'react-highlight';
 import { renderRichText } from "gatsby-source-contentful/rich-text"
 import "../assets/monokai.css";
 import { Container } from '@mui/material';
-
-
+import InfoBar from '../components/blogInforBar';
 
 export const query = graphql`
   query($slug: String!) {
@@ -62,7 +61,6 @@ const BlogPost = (props) => {
 
   return (
     <Container>
-      <div style={{padding: '50px', textAlign: 'left'}}>	
         <div>        
           <h1>{props.data.contentfulBlogPost.title}</h1>
           {props.data.contentfulBlogPost.tldr.internal.content && <h4>TLDR: <em>{props.data.contentfulBlogPost.tldr.internal.content}</em></h4>}
@@ -73,10 +71,13 @@ const BlogPost = (props) => {
               image={image} 
               style={{maxWidth: '70%', height: 'auto'}}
             />
-          }
+      }
+      <InfoBar
+        date={props.data.contentfulBlogPost.publishedDate}
+        content={props.data.contentfulBlogPost.content}
+      />
         <div>{props.data.contentfulBlogPost && renderRichText(props.data.contentfulBlogPost.content, options)}</div>
         <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />
-      </div>
     </Container>
   )
 }

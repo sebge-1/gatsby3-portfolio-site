@@ -1,6 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql} from "gatsby"
 import BlogList from '../components/BlogList.js'
+import { Container } from '@mui/material'
 
 class BlogPage extends React.Component {
   state = {
@@ -9,14 +10,12 @@ class BlogPage extends React.Component {
   
   render(props) {
     return (
-      <>
-        <div style={{padding: '0 40px 40px 40px'}}>
+      <Container>
           <h1>Blog</h1>
            <BlogList 
               posts={this.state.posts} 
             />
-        </div>
-      </>
+      </Container>
     )  
   }
 }

@@ -15,6 +15,7 @@ export const query = graphql`
       title
       heroImage {
         gatsbyImageData
+        description
       }
       tldr {
         internal {
@@ -58,7 +59,8 @@ const BlogPost = (props) => {
     }
   }
   const image = getImage(props.data.contentfulBlogPost.heroImage)
-
+  const description = props.data.contentfulBlogPost.heroImage.description
+  console.log(description)
   return (
     <Container>
         <div>        
@@ -69,7 +71,8 @@ const BlogPost = (props) => {
             props.data.contentfulBlogPost.heroImage && 
             <GatsbyImage 
               image={image} 
-              style={{maxWidth: '70%', height: 'auto'}}
+              style={{ maxWidth: '70%', height: 'auto' }}
+              alt={description || ""}
             />
       }
       <InfoBar

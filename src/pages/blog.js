@@ -32,6 +32,7 @@ export default (props) => {
               publishedDate(formatString: "MMMM Do, YYYY")
               heroImage {
                 gatsbyImageData
+                description
               }
               tag
             }

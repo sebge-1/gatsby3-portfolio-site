@@ -23,7 +23,7 @@ module.exports = {
       "accessToken": process.env.CONTENTFUL_ACCESS_TOKEN,
       "spaceId": "vb0h3gv8lx2b"
     }
-  }, "gatsby-plugin-image", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", {
+  }, "gatsby-plugin-image", "gatsby-plugin-layout", "gatsby-plugin-sharp", "gatsby-transformer-sharp", "gatsby-plugin-sass", {
     resolve: 'gatsby-plugin-google-analytics',
     options: {
       "trackingId": "G-VWSTSMGH7S"

@@ -16,7 +16,11 @@ export default class BlogList extends React.Component {
               <Card sx={{ maxWidth: 345 }} key={index}>
                 <Link to={`/blog/${edge.node.slug}`}>
                   <CardMedia>
-                    {edge.node.heroImage && <GatsbyImage image={edge.node.heroImage.gatsbyImageData}/>}
+                  {edge.node.heroImage &&
+                    <GatsbyImage
+                    image={edge.node.heroImage.gatsbyImageData}
+                    alt={edge.node.heroImage.description}
+                    />}
                   </CardMedia>
                   <CardContent>
                     <Typography gutterBottom variant="h4" component="div">

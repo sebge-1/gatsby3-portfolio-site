@@ -9,6 +9,7 @@ import "../assets/monokai.css";
 import { Container } from '@mui/material';
 import InfoBar from '../components/blogInforBar';
 
+
 export const query = graphql`
   query($slug: String!) {
     contentfulBlogPost(slug: {eq: $slug}) {
@@ -49,18 +50,12 @@ const BlogPost = (props) => {
       }
     },
     renderNode: {
-      "embedded-asset-block": node => {
-        const alt = node.data.target.title['en-US'];
-        const url = node.data.target.file['en-US'].url;
-        return <img alt={alt} src={url} style={{maxWidth: '100%',
-          height: 'auto'}}/>
-      },
       [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
     }
   }
   const image = getImage(props.data.contentfulBlogPost.heroImage)
   const description = props.data.contentfulBlogPost.heroImage.description
-  console.log(description)
+
   return (
     <Container>
         <div>        
@@ -78,6 +73,7 @@ const BlogPost = (props) => {
       <InfoBar
         date={props.data.contentfulBlogPost.publishedDate}
         content={props.data.contentfulBlogPost.content}
+        
       />
         <div>{props.data.contentfulBlogPost && renderRichText(props.data.contentfulBlogPost.content, options)}</div>
         <Disqus.DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />

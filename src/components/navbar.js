@@ -12,7 +12,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from '@mui/material'
+import { Link } from "gatsby";
+
 
 const drawerWidth = 240;
 const navItems = [
@@ -36,9 +37,12 @@ export default function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
+        {navItems.map((item, index) => (
             <ListItem key={item.slug} disablePadding>
-                <Link href={item.slug}>
+                <Link
+                    to={`$item.slug`}
+                    key={index}
+                >
                     <ListItemButton sx={{ textAlign: 'center' }}>
                         <ListItemText primary={item.displayName} />
                     </ListItemButton>
@@ -74,7 +78,7 @@ export default function DrawerAppBar(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                       {navItems.map((item) => (
-            <Link href={item.slug} key={item.slug}>
+            <Link to={item.slug} key={item.slug}>
                 <Button key={item.slug} sx={{ color: '#fff' }}>
                     {item.displayName}
                 </Button>

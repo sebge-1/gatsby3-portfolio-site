@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql} from "gatsby";
 import BlogContainer from '../components/BlogList';
+import { Container } from '@mui/material';
 
 export const query = graphql`
   query($tag: String!) {
@@ -30,8 +31,11 @@ export const query = graphql`
 `
 
 const CategoryPage = (props) => {
-        return (
-            <BlogContainer posts={props.data.allContentfulBlogPost.edges}/>
+    return (
+        <Container>
+            <h1>{props.pageContext.tag}</h1>
+            <BlogContainer posts={props.data.allContentfulBlogPost.edges} />
+        </Container>
         )
 }
 

@@ -31,8 +31,13 @@ export default class BlogList extends React.Component {
                     </Typography>
                     <Typography>
                       {edge.node.tag && edge.node.tag.map((tag, index) => {
-                        return <button key={index} value={tag}>{tag}
-                        </button>
+                        return (
+                          <Link to={`/blog/tags/${tag}`}>
+                            <button key={index} value={tag}>
+                              {tag}
+                            </button>
+                          </Link>
+                        )
                       }
                       )}
                     </Typography>

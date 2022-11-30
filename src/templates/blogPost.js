@@ -8,7 +8,9 @@ import { renderRichText } from "gatsby-source-contentful/rich-text"
 import "../assets/monokai.css";
 import { Container } from '@mui/material';
 import InfoBar from '../components/blogInforBar';
-
+import Chip from '@mui/material/Chip';
+import LabelIcon from '@mui/icons-material/Label';
+import {Link} from 'gatsby';
 
 export const query = graphql`
   query($slug: String!) {
@@ -71,6 +73,16 @@ const BlogPost = (props) => {
               alt={description || ""}
             />
       }
+      <div>
+        {props.data.contentfulBlogPost.tag && props.data.contentfulBlogPost.tag.map((tag, index) => {
+          return (
+            <Link to={`/blog/tags/${tag}`} key={index}>
+              <Chip key={index} label={tag} clickable icon={<LabelIcon />}>
+              </Chip>
+            </Link>
+          )
+        })}
+      </div>
       <InfoBar
         date={props.data.contentfulBlogPost.publishedDate}
         content={props.data.contentfulBlogPost.content}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { StaticQuery, graphql} from "gatsby"
-import BlogContainer from '../components/BlogContainer.js'
+import BlogContainer from '../components/BlogContainer.js';
+import { Container } from '@mui/material';
 
 export default (props) => {
   return <StaticQuery
@@ -23,7 +24,12 @@ export default (props) => {
       }
       `}
       render={(data) => {
-        return <BlogContainer posts={data.allContentfulBlogPost.edges} {...props}/>
+        return (
+          <Container>
+            <h1>Blog</h1>
+            <BlogContainer posts={data.allContentfulBlogPost.edges} {...props} />
+          </Container>
+        )
       }}
     />
   }

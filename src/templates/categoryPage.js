@@ -1,7 +1,6 @@
 import React from 'react'
 import { graphql} from "gatsby";
 import BlogContainer from '../components/BlogList';
-import Blog from '../pages/blog';
 
 export const query = graphql`
   query($tag: String!) {

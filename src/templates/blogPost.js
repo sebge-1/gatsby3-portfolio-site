@@ -27,6 +27,7 @@ export const query = graphql`
       content {
         raw 
       }
+      tag
     }
   } 
 `

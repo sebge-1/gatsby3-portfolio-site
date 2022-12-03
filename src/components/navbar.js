@@ -1,25 +1,26 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import { Link } from "gatsby";
-
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import ModeNightIcon from "@mui/icons-material/ModeNight";
+import IconButton from "@mui/material/IconButton";
 
 const drawerWidth = 240;
 const navItems = [
-    { displayName: 'Home', slug: '/' }, 
-    { displayName: 'Blog', slug: '/blog' },
-    { displayName: 'Projects', slug: '/projects' }
+  { displayName: "Home", slug: "/" },
+  { displayName: "Blog", slug: "/blog" },
+  { displayName: "Projects", slug: "/projects" },
 ];
 
 export default function DrawerAppBar(props) {
@@ -31,32 +32,31 @@ export default function DrawerAppBar(props) {
   };
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         Sebastian Gertz
       </Typography>
       <Divider />
       <List>
         {navItems.map((item, index) => (
-            <ListItem key={item.slug} disablePadding>
-                <Link
-                    to={`$item.slug`}
-                    key={index}
-                >
-                    <ListItemButton sx={{ textAlign: 'center' }}>
-                        <ListItemText primary={item.displayName} />
-                    </ListItemButton>
-                </Link>
-            </ListItem>
+          <ListItem key={item.slug} disablePadding>
+            <Link to={`$item.slug`} key={index}>
+              <ListItemButton sx={{ textAlign: "center" }}>
+                <ListItemText primary={item.displayName} />
+              </ListItemButton>
+            </Link>
+          </ListItem>
         ))}
       </List>
     </Box>
   );
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const icon = !props.darkModeActive ? <WbSunnyIcon /> : <ModeNightIcon />;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: "flex" }}>
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -64,26 +64,33 @@ export default function DrawerAppBar(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-                    Sebastian Gertz
-
+            Sebastian Gertz
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-                      {navItems.map((item) => (
-            <Link to={item.slug} key={item.slug}>
-                <Button key={item.slug} sx={{ color: '#fff' }}>
-                    {item.displayName}
+          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {navItems.map((item) => (
+              <Link to={item.slug} key={item.slug}>
+                <Button key={item.slug} sx={{ color: "#fff" }}>
+                  {item.displayName}
                 </Button>
-            </Link>
+              </Link>
             ))}
+            <IconButton
+              edge="end"
+              color="inherit"
+              aria-label="mode"
+              onClick={() => props.themeSetter(!props.darkModeActive)}
+            >
+              {icon}
+            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>
@@ -97,8 +104,11 @@ export default function DrawerAppBar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
           }}
         >
           {drawer}

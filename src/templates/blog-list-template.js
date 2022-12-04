@@ -6,14 +6,14 @@ import { Container, Tab, Tabs } from "@mui/material";
 export default function BlogListTemplate({ pageContext }) {
   const { pageCount, group, index } = pageContext;
   const previousUrl =
-    index - 1 == 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
+    index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
   const nextUrl = `/blog/${(index + 1).toString()}`;
 
   return (
     <Container>
       <h1>Read articles from {pageCount} pages </h1>;
       <BlogList posts={group} />
-      <Tabs sx={{ margin: 4 }}>
+      <Tabs sx={{ margin: 4 }} value={false}>
         {index > 1 && (
           <Tab to={previousUrl} label="Previous" component={Link}></Tab>
         )}
@@ -23,7 +23,7 @@ export default function BlogListTemplate({ pageContext }) {
           // }
           return (
             <Tab
-              key={index}
+              key={idx}
               label={idx + 1}
               to={idx === 0 ? "/blog" : "/blog/" + (idx + 1)}
               component={Link}

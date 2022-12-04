@@ -1,42 +1,44 @@
-import React from 'react'
-import { graphql} from "gatsby";
-import BlogContainer from '../components/BlogList';
-import { Container } from '@mui/material';
+import React from "react";
+import { Link } from "gatsby";
+import BlogList from "../components/BlogList";
+import { Container, Tab, Tabs } from "@mui/material";
 
-export const query = graphql`
-  query($tag: String!) {
-    allContentfulBlogPost(filter: { tag: {eq: $tag}}) {
-        edges {
-            node {
-                title
-                slug
-                heroImage {
-                    gatsbyImageData
-                    description
-                }
-                tldr {
-                    internal {
-                    content
-                    }
-                }
-                publishedDate(formatString: "MMMM Do, YYYY")
-                content {
-                    raw 
-                }
-                tag
-            }
-        }
-    }
+export default function CategoryListTemplate({ pageContext }) {
+  const { pageCount, group, index } = pageContext;
+  const tag = pageContext.tag;
+
+  const previousUrl =
+    index - 1 === 1
+      ? `/blog/tags/${tag}`
+      : `/blog/tags/${tag}/${(index - 1).toString()}`;
+  const nextUrl = `/blog/tags/${tag}/${(index + 1).toString()}`;
+
+  return (
+    <Container>
+      <h1>Read articles from {pageCount} pages </h1>
+      <BlogList posts={group} />
+      <Tabs sx={{ margin: 4 }} value={false}>
+        {index > 1 && (
+          <Tab to={previousUrl} label="Previous" component={Link}></Tab>
+        )}
+        {Array.from({ length: pageCount }, (_, idx) => {
+          return (
+            <Tab
+              key={idx}
+              label={idx + 1}
+              to={
+                idx === 0
+                  ? `/blog/tags/${tag}`
+                  : `/blog/tags/${tag}/` + (idx + 1)
+              }
+              component={Link}
+            ></Tab>
+          );
+        })}
+        {index < pageCount && (
+          <Tab to={nextUrl} label="Next" component={Link}></Tab>
+        )}
+      </Tabs>
+    </Container>
+  );
 }
-`
-
-const CategoryPage = (props) => {
-    return (
-        <Container>
-            <h1>{props.pageContext.tag}</h1>
-            <BlogContainer posts={props.data.allContentfulBlogPost.edges} />
-        </Container>
-        )
-}
-
-export default CategoryPage;

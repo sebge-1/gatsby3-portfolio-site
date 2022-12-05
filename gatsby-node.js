@@ -44,7 +44,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.slug,
       },
     });
-    post.tag.forEach((tag) => tags.add(tag));
+    post.node.tag.forEach((tag) => tags.add(tag));
   });
   // 2. Create Tag Pages
   tags.forEach((tag) => {
@@ -55,7 +55,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
       pageTemplate: categoryTemplate,
       pageLength: 2,
       pathPrefix: `/blog/tags/${tag}`,
-      context: { tag },
+      context: { tag, tags: [...tags] },
     });
   });
   // 3. Create Blog List Pages
@@ -65,5 +65,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     pageTemplate: "src/templates/blog-list-template.js",
     pageLength: 4,
     pathPrefix: "blog",
+    context: { tags: [...tags] },
   });
 };

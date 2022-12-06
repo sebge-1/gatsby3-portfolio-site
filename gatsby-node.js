@@ -34,7 +34,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
   `);
 
   const posts = res.data.allContentfulBlogPost.edges;
-  const tags = new Set();
+  const tagList = new Set();
   // 1. Create Individual Blog Post Pages
   posts.forEach((post) => {
     createPage({
@@ -44,10 +44,15 @@ module.exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.slug,
       },
     });
-    post.node.tag.forEach((tag) => tags.add(tag));
+    post.node.tag.forEach((tag) => tagList.add(tag));
   });
   // 2. Create Tag Pages
-  tags.forEach((tag) => {
+  const tags = [];
+  tagList.forEach((tag) => {
+    filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
+    tags.push({ tagName: tag, postCount: filteredPosts.length });
+  });
+  tagList.forEach((tag) => {
     filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
     createPaginatedPages({
       edges: filteredPosts,

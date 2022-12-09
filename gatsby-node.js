@@ -27,6 +27,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
               raw
             }
             tag
+            section
           }
         }
       }
@@ -35,6 +36,14 @@ module.exports.createPages = async ({ graphql, actions }) => {
 
   const posts = res.data.allContentfulBlogPost.edges;
   const tagList = new Set();
+  posts.forEach((post) => {
+    post.node.tag.forEach((tag) => tagList.add(tag));
+  });
+  const tags = [];
+  tagList.forEach((tag) => {
+    filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
+    tags.push({ tagName: tag, postCount: filteredPosts.length });
+  });
   // 1. Create Individual Blog Post Pages
   posts.forEach((post) => {
     createPage({
@@ -42,16 +51,11 @@ module.exports.createPages = async ({ graphql, actions }) => {
       path: `/blog/${post.node.slug}`,
       context: {
         slug: post.node.slug,
+        tags,
       },
     });
-    post.node.tag.forEach((tag) => tagList.add(tag));
   });
   // 2. Create Tag Pages
-  const tags = [];
-  tagList.forEach((tag) => {
-    filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
-    tags.push({ tagName: tag, postCount: filteredPosts.length });
-  });
   tagList.forEach((tag) => {
     filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
     createPaginatedPages({

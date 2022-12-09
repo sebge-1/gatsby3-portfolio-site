@@ -57,7 +57,9 @@ const BlogPost = (props) => {
     renderNode: {
       [BLOCKS.PARAGRAPH]: (node, children) => <Text>{children}</Text>,
       [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 id={`${slugify(node.content[0].value)}`}>{children}</h2>
+        <h2 className="anchor" id={`${slugify(node.content[0].value)}`}>
+          {children}
+        </h2>
       ),
     },
   };
@@ -67,15 +69,12 @@ const BlogPost = (props) => {
   return (
     <Grid container>
       <Grid item lg={10} md={9} xs={8}>
-        <div>
-          <h1>{props.data.contentfulBlogPost.title}</h1>
-          {props.data.contentfulBlogPost.tldr.internal.content && (
-            <h4>
-              TLDR:{" "}
-              <em>{props.data.contentfulBlogPost.tldr.internal.content}</em>
-            </h4>
-          )}
-        </div>
+        <h1>{props.data.contentfulBlogPost.title}</h1>
+        {props.data.contentfulBlogPost.tldr.internal.content && (
+          <h4>
+            TLDR: <em>{props.data.contentfulBlogPost.tldr.internal.content}</em>
+          </h4>
+        )}
         {props.data.contentfulBlogPost.heroImage && (
           <GatsbyImage
             image={image}
@@ -102,10 +101,8 @@ const BlogPost = (props) => {
           date={props.data.contentfulBlogPost.publishedDate}
           content={props.data.contentfulBlogPost.content}
         />
-        <div>
-          {props.data.contentfulBlogPost &&
-            renderRichText(props.data.contentfulBlogPost.content, options)}
-        </div>
+        {props.data.contentfulBlogPost &&
+          renderRichText(props.data.contentfulBlogPost.content, options)}
         <Box sx={{ color: "primary" }}>
           <Disqus.DiscussionEmbed
             shortname={disqusShortname}

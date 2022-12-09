@@ -11,6 +11,7 @@ import { Link } from "gatsby";
 export default function IconMenu(props) {
   return (
     <Paper sx={{ width: 320, maxWidth: "100%" }}>
+      <h1>Tags</h1>
       <MenuList>
         {props.tags.map((tag, index) => (
           <MenuItem key={index}>

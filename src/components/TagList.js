@@ -10,11 +10,11 @@ import { Link } from "gatsby";
 
 export default function IconMenu(props) {
   return (
-    <Paper sx={{ width: 320, maxWidth: "100%" }}>
+    <>
       <h1>Tags</h1>
       <MenuList>
         {props.tags.map((tag, index) => (
-          <MenuItem key={index}>
+          <MenuItem key={index} sx={{ paddingLeft: "0" }}>
             <ListItemIcon key={index}>
               <Link to={`/blog/tags/${tag.tagName}`} key={index}>
                 <Badge badgeContent={tag.postCount} color="secondary">
@@ -30,6 +30,6 @@ export default function IconMenu(props) {
           </MenuItem>
         ))}
       </MenuList>
-    </Paper>
+    </>
   );
 }

@@ -8,7 +8,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
 
   const res = await graphql(`
     query {
-      allContentfulBlogPost {
+      allContentfulBlogPost(sort: { publishedDate: DESC }) {
         edges {
           node {
             title
@@ -62,7 +62,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
       edges: filteredPosts,
       createPage,
       pageTemplate: categoryTemplate,
-      pageLength: 2,
+      pageLength: 6,
       pathPrefix: `/blog/tags/${tag}`,
       context: { tag, tags: [...tags] },
     });
@@ -72,7 +72,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
     edges: posts,
     createPage,
     pageTemplate: "src/templates/blog-list-template.js",
-    pageLength: 4,
+    pageLength: 6,
     pathPrefix: "blog",
     context: { tags: [...tags] },
   });

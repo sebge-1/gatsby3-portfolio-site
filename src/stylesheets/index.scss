@@ -1,3 +1,32 @@
 @import 'base_styles';
+@import './transitions/shake-vertical.css';
 
 #disqus_thread { color-scheme: none; }
+
+
+.anchor {
+    padding-top: 80px;
+    margin-top: -80px;
+  }
+  
+  .sticky-arrow {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: pointer;
+  }
+  
+  .sticky-arrow:hover {
+    bottom: 25px;
+  }
+  
+
+.sticky-arrow:hover {
+    bottom: 25px;
+  }
+  
+  .shake-vertical {
+      -webkit-animation: shake-vertical 5s ease-in-out infinite both;
+              animation: shake-vertical 5s ease-in-out infinite both;
+  }

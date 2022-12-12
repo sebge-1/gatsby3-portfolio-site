@@ -8,27 +8,39 @@ const PaginationController = ({
   previousUrl,
   nextUrl,
   index,
-}) => (
-  <Tabs sx={{ margin: 4 }} value={false}>
-    {index > 1 && (
-      <Tab to={previousUrl} label="Previous" component={Link}></Tab>
-    )}
-    {Array.from({ length: pageCount }, (_, idx) => {
-      return (
-        <Tab
-          key={idx}
-          label={idx + 1}
-          to={
-            idx === 0 ? `/blog/tags/${tag}` : `/blog/tags/${tag}/` + (idx + 1)
-          }
-          component={Link}
-        ></Tab>
-      );
-    })}
-    {index < pageCount && (
-      <Tab to={nextUrl} label="Next" component={Link}></Tab>
-    )}
-  </Tabs>
-);
+  pathPrefix,
+  skipPagination,
+}) => {
+  if (pathPrefix.includes("tags")) {
+    pathPrefix = `/blog/tags/${tag}`;
+  } else {
+    pathPrefix = "/blog";
+  }
+  console.log(index, pageCount);
+  return (
+    <Tabs sx={{ margin: 4 }} value={false}>
+      {index > 1 && (
+        <Tab to={previousUrl} label="Previous" component={Link}></Tab>
+      )}
+
+      {/* show pagination only for paginated components */}
+      {!skipPagination &&
+        Array.from({ length: pageCount }, (_, idx) => {
+          console.log(pathPrefix);
+          return (
+            <Tab
+              key={idx}
+              label={idx + 1}
+              to={idx === 0 ? pathPrefix : `${pathPrefix}/` + (idx + 1)}
+              component={Link}
+            ></Tab>
+          );
+        })}
+      {index < pageCount && (
+        <Tab to={nextUrl} label="Next" component={Link}></Tab>
+      )}
+    </Tabs>
+  );
+};
 
 export default PaginationController;

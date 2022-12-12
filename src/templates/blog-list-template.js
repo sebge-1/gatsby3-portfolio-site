@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 
 export default function BlogListTemplate({ pageContext }) {
-  const { pageCount, group, index, tags } = pageContext;
+  const { pageCount, group, index, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
   const nextUrl = `/blog/${(index + 1).toString()}`;
@@ -21,6 +21,7 @@ export default function BlogListTemplate({ pageContext }) {
             nextUrl={nextUrl}
             pageCount={pageCount}
             index={index}
+            pathPrefix={pathPrefix}
           />
         </Container>
       </Grid>

@@ -5,8 +5,7 @@ import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 
 export default function CategoryListTemplate({ pageContext }) {
-  const { pageCount, group, index, tag, tags } = pageContext;
-
+  const { pageCount, group, index, tag, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1
       ? `/blog/tags/${tag}`
@@ -24,6 +23,8 @@ export default function CategoryListTemplate({ pageContext }) {
             previousUrl={previousUrl}
             nextUrl={nextUrl}
             pageCount={pageCount}
+            pathPrefix={pathPrefix}
+            index={index}
           />
         </Container>
       </Grid>

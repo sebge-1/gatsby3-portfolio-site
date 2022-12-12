@@ -13,6 +13,7 @@ import LabelIcon from "@mui/icons-material/Label";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
 import SideBar from "../components/SideBar";
+import PaginationController from "../components/PaginationController";
 
 export const query = graphql`
   query ($slug: String!) {
@@ -38,6 +39,10 @@ export const query = graphql`
 `;
 const BlogPost = (props) => {
   const { tags } = props.pageContext;
+  const { posts } = props.pageContext;
+  const { index } = props.pageContext;
+  const { pathPrefix } = props.pageContext;
+
   const disqusShortname = "sebastiangertz";
   const disqusConfig = {
     url: props.data.contentfulBlogPost.slug,
@@ -65,53 +70,75 @@ const BlogPost = (props) => {
   };
   const image = getImage(props.data.contentfulBlogPost.heroImage);
   const description = props.data.contentfulBlogPost.heroImage.description;
+  const previousUrl =
+    index === 0 ? pathPrefix : `${pathPrefix}/${posts[index - 1].node.slug}`;
+  const nextUrl =
+    index < posts.length - 1
+      ? `${pathPrefix}/${posts[index + 1].node.slug}`
+      : "";
 
   return (
     <Grid container>
       <Grid item lg={10} md={9} xs={8}>
-        <h1>{props.data.contentfulBlogPost.title}</h1>
-        {props.data.contentfulBlogPost.tldr.internal.content && (
-          <h4>
-            TLDR: <em>{props.data.contentfulBlogPost.tldr.internal.content}</em>
-          </h4>
-        )}
-        {props.data.contentfulBlogPost.heroImage && (
-          <GatsbyImage
-            image={image}
-            style={{ maxWidth: "70%", height: "auto" }}
-            alt={description || ""}
+        <Container>
+          <h1>{props.data.contentfulBlogPost.title}</h1>
+          {props.data.contentfulBlogPost.tldr.internal.content && (
+            <h4>
+              TLDR:{" "}
+              <em>{props.data.contentfulBlogPost.tldr.internal.content}</em>
+            </h4>
+          )}
+          {props.data.contentfulBlogPost.heroImage && (
+            <GatsbyImage
+              image={image}
+              style={{ maxWidth: "70%", height: "auto" }}
+              alt={description || ""}
+            />
+          )}
+          <div>
+            {props.data.contentfulBlogPost.tag &&
+              props.data.contentfulBlogPost.tag.map((tag, index) => {
+                return (
+                  <Link to={`/blog/tags/${tag}`} key={index}>
+                    <Chip
+                      key={index}
+                      label={tag}
+                      clickable
+                      icon={<LabelIcon />}
+                    ></Chip>
+                  </Link>
+                );
+              })}
+          </div>
+          <InfoBar
+            date={props.data.contentfulBlogPost.publishedDate}
+            content={props.data.contentfulBlogPost.content}
           />
-        )}
-        <div>
-          {props.data.contentfulBlogPost.tag &&
-            props.data.contentfulBlogPost.tag.map((tag, index) => {
-              return (
-                <Link to={`/blog/tags/${tag}`} key={index}>
-                  <Chip
-                    key={index}
-                    label={tag}
-                    clickable
-                    icon={<LabelIcon />}
-                  ></Chip>
-                </Link>
-              );
-            })}
-        </div>
-        <InfoBar
-          date={props.data.contentfulBlogPost.publishedDate}
-          content={props.data.contentfulBlogPost.content}
-        />
-        {props.data.contentfulBlogPost &&
-          renderRichText(props.data.contentfulBlogPost.content, options)}
-        <Box sx={{ color: "primary" }}>
-          <Disqus.DiscussionEmbed
-            shortname={disqusShortname}
-            config={disqusConfig}
+          {props.data.contentfulBlogPost &&
+            renderRichText(props.data.contentfulBlogPost.content, options)}
+          <PaginationController
+            index={index + 1}
+            nextUrl={nextUrl}
+            previousUrl={previousUrl}
+            pathPrefix={pathPrefix}
+            skipPagination={true}
+            pageCount={posts.length}
           />
-        </Box>
+          <Box sx={{ color: "primary" }}>
+            <Disqus.DiscussionEmbed
+              shortname={disqusShortname}
+              config={disqusConfig}
+            />
+          </Box>
+        </Container>
       </Grid>
       <Grid item lg={2} md={3} xs={4}>
-        <SideBar sections={props.data.contentfulBlogPost.section} tags={tags} />
+        <Container>
+          <SideBar
+            sections={props.data.contentfulBlogPost.section}
+            tags={tags}
+          />
+        </Container>
       </Grid>
     </Grid>
   );

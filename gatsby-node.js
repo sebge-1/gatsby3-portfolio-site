@@ -45,26 +45,30 @@ module.exports.createPages = async ({ graphql, actions }) => {
     tags.push({ tagName: tag, postCount: filteredPosts.length });
   });
   // 1. Create Individual Blog Post Pages
-  posts.forEach((post) => {
+  posts.forEach((post, index) => {
     createPage({
       component: blogTemplate,
       path: `/blog/${post.node.slug}`,
       context: {
         slug: post.node.slug,
         tags,
+        posts,
+        index: index + 1,
+        pathPrefix: "/blog",
       },
     });
   });
   // 2. Create Tag Pages
   tagList.forEach((tag) => {
-    filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
+    let filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
+    let prefix = "/blog/tags";
     createPaginatedPages({
       edges: filteredPosts,
       createPage,
       pageTemplate: categoryTemplate,
       pageLength: 6,
-      pathPrefix: `/blog/tags/${tag}`,
-      context: { tag, tags: [...tags] },
+      pathPrefix: `${prefix}/${tag}`,
+      context: { tag, tags: [...tags], pathPrefix: `${prefix}/${tag}` },
     });
   });
   // 3. Create Blog List Pages
@@ -74,6 +78,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     pageTemplate: "src/templates/blog-list-template.js",
     pageLength: 6,
     pathPrefix: "blog",
-    context: { tags: [...tags] },
+    context: { tags: [...tags], pathPrefix: "blog" },
   });
 };

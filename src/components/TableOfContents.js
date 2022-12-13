@@ -1,17 +1,16 @@
 import * as React from "react";
-import Paper from "@mui/material/Paper";
 import { slugify } from "../utils/slugify";
 
-const TableOfContents = (props) => {
+const TableOfContents = ({ sections, index }) => {
   return (
-    <Paper>
+    <>
       <h1>Table of Contents</h1>
-      {props.sections.map((section) => (
-        <a href={`#${slugify(section)}`}>
+      {sections.map((section, index) => (
+        <a href={`#${slugify(section)}`} key={index}>
           <h3>{section}</h3>
         </a>
       ))}
-    </Paper>
+    </>
   );
 };
 

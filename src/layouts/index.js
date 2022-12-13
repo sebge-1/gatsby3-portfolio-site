@@ -10,7 +10,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import dark from "../themes/dark.js";
 import light from "../themes/light.js";
-import StickyArrow from "../components/StickyArrow";
 
 const Layout = ({ children, location }) => {
   const [darkMode, setDarkMode] = useState(false);
@@ -28,9 +27,7 @@ const Layout = ({ children, location }) => {
           darkModeActive={darkMode}
           themeSetter={setDarkMode}
         />
-        <Transition location={location}>{children}</Transition>
-        <StickyArrow />
-        <Footer />
+        <Transition location={location}>{children}</Transition> <Footer />
       </Stack>
     </ThemeProvider>
   );

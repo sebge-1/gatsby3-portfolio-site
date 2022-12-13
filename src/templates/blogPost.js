@@ -38,10 +38,7 @@ export const query = graphql`
   }
 `;
 const BlogPost = (props) => {
-  const { tags } = props.pageContext;
-  const { posts } = props.pageContext;
-  const { index } = props.pageContext;
-  const { pathPrefix } = props.pageContext;
+  const { tags, posts, index, pathPrefix } = props.pageContext;
 
   const disqusShortname = "sebastiangertz";
   const disqusConfig = {
@@ -71,7 +68,7 @@ const BlogPost = (props) => {
   const image = getImage(props.data.contentfulBlogPost.heroImage);
   const description = props.data.contentfulBlogPost.heroImage.description;
   const previousUrl =
-    index === 0 ? pathPrefix : `${pathPrefix}/${posts[index - 1].node.slug}`;
+    index === 0 ? "" : `${pathPrefix}/${posts[index - 1].node.slug}`;
   const nextUrl =
     index < posts.length - 1
       ? `${pathPrefix}/${posts[index + 1].node.slug}`

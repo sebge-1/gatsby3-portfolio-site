@@ -15,6 +15,9 @@ import { Link } from "gatsby";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 import IconButton from "@mui/material/IconButton";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Fab from "@mui/material/Fab";
+import ScrollTop from "./ScrollTop";
 
 const drawerWidth = 240;
 const navItems = [
@@ -56,7 +59,7 @@ export default function DrawerAppBar(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex" }} id="back-to-top-anchor">
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -113,6 +116,11 @@ export default function DrawerAppBar(props) {
         >
           {drawer}
         </Drawer>
+        <ScrollTop {...props}>
+          <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
       </Box>
     </Box>
   );

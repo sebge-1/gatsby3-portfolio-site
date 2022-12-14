@@ -53,7 +53,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.slug,
         tags,
         posts,
-        index: index + 1,
+        post,
+        index,
         pathPrefix: "/blog",
       },
     });

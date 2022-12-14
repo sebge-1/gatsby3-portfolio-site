@@ -1,14 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
-import { graphql } from "gatsby";
+import React from "react";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { BLOCKS, MARKS } from "@contentful/rich-text-types";
-import Disqus from "disqus-react";
 import Highlight from "react-highlight";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import "../assets/monokai.css";
-import { Box, Container, Grid } from "@mui/material";
+import { Container, Grid, Chip } from "@mui/material";
 import InfoBar from "../components/blogInforBar";
-import Chip from "@mui/material/Chip";
 import LabelIcon from "@mui/icons-material/Label";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";

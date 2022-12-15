@@ -18,6 +18,7 @@ import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import Fab from "@mui/material/Fab";
 import ScrollTop from "./ScrollTop";
+import Modal from "./Modal.js";
 
 const drawerWidth = 240;
 const navItems = [
@@ -33,6 +34,9 @@ export default function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => setOpen(!open);
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
@@ -86,6 +90,8 @@ export default function DrawerAppBar(props) {
                 </Button>
               </Link>
             ))}
+            <Button onClick={handleClick}>Get in touch</Button>
+            <Modal open={open} handleClick={handleClick} />
             <IconButton
               edge="end"
               color="inherit"

@@ -1,9 +1,15 @@
 @import 'base_styles';
-@import './transitions/shake-vertical.css';
-
-#disqus_thread { color-scheme: none; }
 
 .anchor {
     padding-top: 80px;
     margin-top: -80px;
   }
+
+.activeTag {
+    background-color: #9E9EFF;
+  }
+
+.activeTag:hover {
+  background-color: #9E9EFF;
+  filter: brightness(110%);
+}

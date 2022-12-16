@@ -1,14 +1,14 @@
 import * as React from "react";
-import Paper from "@mui/material/Paper";
+import { useState } from "react";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Chip from "@mui/material/Chip";
-import LabelIcon from "@mui/icons-material/Label";
 import { Link } from "gatsby";
+import { slugify } from "../utils/slugify";
 
-export default function IconMenu(props) {
+export default function TagList(props) {
   return (
     <>
       <h1>Tags</h1>
@@ -22,7 +22,12 @@ export default function IconMenu(props) {
                     key={index}
                     label={tag.tagName}
                     clickable
-                    icon={<LabelIcon />}
+                    className={
+                      props.activeTag && props.activeTag.tagName === tag.tagName
+                        ? "activeTag"
+                        : ""
+                    }
+                    onClick={() => props.setActiveTag(tag.tagName)}
                   />
                 </Badge>
               </Link>

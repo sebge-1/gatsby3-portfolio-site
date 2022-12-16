@@ -4,7 +4,7 @@ import { Container, Grid } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 
-export default function BlogListTemplate({ pageContext }) {
+export default function BlogListTemplate({ pageContext, location }) {
   const { pageCount, group, index, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
@@ -15,7 +15,7 @@ export default function BlogListTemplate({ pageContext }) {
       <Grid item lg={10} md={9} xs={8}>
         <Container>
           <h1>Read articles from {pageCount} pages </h1>
-          <BlogList posts={group} />
+          <BlogList posts={group} location={location} />
           <PaginationController
             previousUrl={previousUrl}
             nextUrl={nextUrl}
@@ -26,7 +26,7 @@ export default function BlogListTemplate({ pageContext }) {
         </Container>
       </Grid>
       <Grid item lg={2} md={3} xs={4}>
-        <SideBar tags={tags} />
+        <SideBar tags={tags} location={location} />
       </Grid>
     </Grid>
   );

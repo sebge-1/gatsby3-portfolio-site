@@ -1,22 +1,25 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  MenuIcon,
+  Toolbar,
+  Typography,
+  Button,
+  Fab,
+} from "@mui/material";
+
 import { Link } from "gatsby";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import ModeNightIcon from "@mui/icons-material/ModeNight";
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Fab from "@mui/material/Fab";
 import ScrollTop from "./ScrollTop";
 import Modal from "./Modal.js";
 
@@ -90,7 +93,9 @@ export default function DrawerAppBar(props) {
                 </Button>
               </Link>
             ))}
-            <Button onClick={handleClick}>Get in touch</Button>
+            <Button sx={{ color: "#fff" }} onClick={handleClick}>
+              Get in touch
+            </Button>
             <Modal open={open} handleClick={handleClick} />
             <IconButton
               edge="end"

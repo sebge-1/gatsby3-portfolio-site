@@ -49,7 +49,14 @@ const BlogList = (props) => {
                           label={tag}
                           clickable
                           onClick={() => setActiveTag(tag)}
-                          className={activeTag === tag ? "activeTag" : ""}
+                          sx={{
+                            bgcolor:
+                              activeTag && activeTag === tag ? "#9E9EFF" : "",
+                            "&:hover": {
+                              bgcolor:
+                                activeTag && activeTag === tag ? "#b8b8ff" : "",
+                            },
+                          }}
                         />
                       </Link>
                     );

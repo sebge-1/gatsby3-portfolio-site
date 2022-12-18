@@ -6,14 +6,13 @@ import Badge from "@mui/material/Badge";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Chip from "@mui/material/Chip";
 import { Link } from "gatsby";
-import { slugify } from "../utils/slugify";
 
-export default function TagList(props) {
+export default function TagList({ activeTag, setActiveTag, tags }) {
   return (
     <>
       <h1>Tags</h1>
       <MenuList>
-        {props.tags.map((tag, index) => (
+        {tags.map((tag, index) => (
           <MenuItem key={index} sx={{ paddingLeft: "0" }}>
             <ListItemIcon key={index}>
               <Link to={`/blog/tags/${tag.tagName}`} key={index}>
@@ -22,12 +21,19 @@ export default function TagList(props) {
                     key={index}
                     label={tag.tagName}
                     clickable
-                    className={
-                      props.activeTag && props.activeTag.tagName === tag.tagName
-                        ? "activeTag"
-                        : ""
-                    }
-                    onClick={() => props.setActiveTag(tag.tagName)}
+                    sx={{
+                      bgcolor:
+                        activeTag && activeTag.tagName === tag.tagName
+                          ? "#9E9EFF"
+                          : "",
+                      "&:hover": {
+                        bgcolor:
+                          activeTag && activeTag.tagName === tag.tagName
+                            ? "#b8b8ff"
+                            : "",
+                      },
+                    }}
+                    onClick={() => setActiveTag(tag.tagName)}
                   />
                 </Badge>
               </Link>

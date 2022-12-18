@@ -93,10 +93,20 @@ export default function DrawerAppBar(props) {
                 </Button>
               </Link>
             ))}
-            <Button sx={{ color: "#fff" }} onClick={handleClick}>
+            <Button
+              sx={{
+                display: "inline-block",
+
+                color: "#fff",
+                border: "2px solid #F48FB1",
+                ":hover": {
+                  backgroundColor: "#F48FB1",
+                },
+              }}
+              onClick={handleClick}
+            >
               Get in touch
             </Button>
-            <Modal open={open} handleClick={handleClick} />
             <IconButton
               edge="end"
               color="inherit"
@@ -105,6 +115,7 @@ export default function DrawerAppBar(props) {
             >
               {icon}
             </IconButton>
+            <Modal open={open} handleClick={handleClick} />
           </Box>
         </Toolbar>
       </AppBar>

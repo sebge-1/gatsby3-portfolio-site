@@ -1,24 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogList from "../components/BlogList";
 import { Container, Grid } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
-import { slugify } from "../utils/slugify";
+import getActiveTagfromPath from "../utils/getActiveTagfromPath";
 
 export default function CategoryListTemplate({ pageContext, location }) {
-  const { pageCount, group, index, tag, tags, pathPrefix } = pageContext;
+  const { pageCount, group, index, slug: tag, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1
       ? `/blog/tags/${tag}`
       : `/blog/tags/${tag}/${(index - 1).toString()}`;
   const nextUrl = `/blog/tags/${tag}/${(index + 1).toString()}`;
 
+  const currentlyActive = getActiveTagfromPath(location.pathname);
+  const [activeTag, setActiveTag] = useState(currentlyActive);
+
   return (
     <Grid container>
       <Grid item lg={10} md={9} xs={8}>
         <Container>
           <h1>Read articles from {pageCount} pages </h1>
-          <BlogList posts={group} location={location} tags={tags} />
+          <BlogList
+            posts={group}
+            location={location}
+            tags={tags}
+            setActiveTag={setActiveTag}
+            activeTag={activeTag}
+          />
           <PaginationController
             tag={tag}
             previousUrl={previousUrl}
@@ -30,7 +39,13 @@ export default function CategoryListTemplate({ pageContext, location }) {
         </Container>
       </Grid>
       <Grid item lg={2} md={3} xs={4}>
-        <SideBar tags={tags} tag={tag} location={location} />
+        <SideBar
+          tags={tags}
+          tag={tag}
+          location={location}
+          setActiveTag={setActiveTag}
+          activeTag={activeTag}
+        />
       </Grid>
     </Grid>
   );

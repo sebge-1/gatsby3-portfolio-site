@@ -6,7 +6,6 @@ import { renderRichText } from "gatsby-source-contentful/rich-text";
 import "../assets/monokai.css";
 import { Container, Grid, Chip } from "@mui/material";
 import InfoBar from "../components/blogInforBar";
-import LabelIcon from "@mui/icons-material/Label";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
 import SideBar from "../components/SideBar";
@@ -14,7 +13,7 @@ import PaginationController from "../components/PaginationController";
 
 const BlogPost = (props) => {
   const { tags, posts, index, pathPrefix, post } = props.pageContext;
-  const { heroImage, slug, title, content, tldr, tag, publishedDate, section } =
+  const { heroImage, title, content, tldr, tag, publishedDate, section } =
     post.node;
 
   const Text = ({ children }) => (
@@ -64,15 +63,13 @@ const BlogPost = (props) => {
           <div>
             {tag &&
               tag.map((tag, index) => {
+                const slug = slugify(tag);
                 return (
-                  <Link to={`/blog/tags/${tag}`} key={index}>
-                    <Chip
-                      key={index}
-                      label={tag}
-                      clickable
-                      icon={<LabelIcon />}
-                    ></Chip>
-                  </Link>
+                  <Container>
+                    <Link to={`/blog/tags/${slug}`} key={index}>
+                      <Chip key={index} label={tag} clickable />
+                    </Link>
+                  </Container>
                 );
               })}
           </div>
@@ -90,7 +87,7 @@ const BlogPost = (props) => {
       </Grid>
       <Grid item lg={2} md={3} xs={4}>
         <Container>
-          <SideBar sections={section} tags={tags} />
+          <SideBar sections={section} tags={tags} location={props.location} />
         </Container>
       </Grid>
     </Grid>

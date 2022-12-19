@@ -6,6 +6,7 @@ import Badge from "@mui/material/Badge";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Chip from "@mui/material/Chip";
 import { Link } from "gatsby";
+import { slugify } from "../utils/slugify";
 
 export default function TagList({ activeTag, setActiveTag, tags }) {
   return (
@@ -15,7 +16,7 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
         {tags.map((tag, index) => (
           <MenuItem key={index} sx={{ paddingLeft: "0" }}>
             <ListItemIcon key={index}>
-              <Link to={`/blog/tags/${tag.tagName}`} key={index}>
+              <Link to={`/blog/tags/${slugify(tag.tagName)}`} key={index}>
                 <Badge badgeContent={tag.postCount} color="secondary">
                   <Chip
                     key={index}
@@ -23,12 +24,12 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
                     clickable
                     sx={{
                       bgcolor:
-                        activeTag && activeTag.tagName === tag.tagName
+                        activeTag && activeTag === slugify(tag.tagName)
                           ? "#9E9EFF"
                           : "",
                       "&:hover": {
                         bgcolor:
-                          activeTag && activeTag.tagName === tag.tagName
+                          activeTag && activeTag === slugify(tag.tagName)
                             ? "#b8b8ff"
                             : "",
                       },

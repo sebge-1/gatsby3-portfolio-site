@@ -8,17 +8,6 @@ import Chip from "@mui/material/Chip";
 import { slugify } from "../utils/slugify";
 
 const BlogList = (props) => {
-  const path = props.location.pathname.split("/").at(-2);
-  let currentlyActive = "";
-  if (props.tags) {
-    currentlyActive = props.tags.filter(
-      (tag) => slugify(tag.tagName) === slugify(decodeURI(path))
-    );
-  }
-  const [activeTag, setActiveTag] = useState(
-    currentlyActive ? currentlyActive[0].tagName : ""
-  );
-
   return (
     <Grid
       container
@@ -42,19 +31,24 @@ const BlogList = (props) => {
               <CardContent>
                 {edge.node.tag &&
                   edge.node.tag.map((tag, index) => {
+                    const slug = slugify(tag);
                     return (
-                      <Link to={`/blog/tags/${tag}`} key={index}>
+                      <Link to={`/blog/tags/${slug}`} key={index}>
                         <Chip
                           key={index}
                           label={tag}
                           clickable
-                          onClick={() => setActiveTag(tag)}
+                          onClick={() => props.setActiveTag(slug)}
                           sx={{
                             bgcolor:
-                              activeTag && activeTag === tag ? "#9E9EFF" : "",
+                              props.activeTag && props.activeTag === slug
+                                ? "#9E9EFF"
+                                : "",
                             "&:hover": {
                               bgcolor:
-                                activeTag && activeTag === tag ? "#b8b8ff" : "",
+                                props.activeTag && props.activeTag === slug
+                                  ? "#b8b8ff"
+                                  : "",
                             },
                           }}
                         />

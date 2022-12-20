@@ -1,6 +1,6 @@
 import React from "react";
 import BlogList from "../components/BlogList";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Divider } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 
@@ -25,6 +25,7 @@ export default function BlogListTemplate({ pageContext, location }) {
           />
         </Container>
       </Grid>
+      <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
       <Grid item lg={2} md={3} xs={4}>
         <SideBar tags={tags} location={location} />
       </Grid>

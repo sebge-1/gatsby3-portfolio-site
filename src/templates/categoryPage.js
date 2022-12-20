@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import BlogList from "../components/BlogList";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Paper } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import getActiveTagfromPath from "../utils/getActiveTagfromPath";
+import { Divider } from "@mui/material";
 
 export default function CategoryListTemplate({ pageContext, location }) {
   const { pageCount, group, index, slug: tag, tags, pathPrefix } = pageContext;
@@ -17,7 +18,7 @@ export default function CategoryListTemplate({ pageContext, location }) {
   const [activeTag, setActiveTag] = useState(currentlyActive);
 
   return (
-    <Grid container>
+    <Grid container divider={<Divider orientation="vertical" />}>
       <Grid item lg={10} md={9} xs={8}>
         <Container>
           <h1>Read articles from {pageCount} pages </h1>
@@ -38,6 +39,7 @@ export default function CategoryListTemplate({ pageContext, location }) {
           />
         </Container>
       </Grid>
+      <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
       <Grid item lg={2} md={3} xs={4}>
         <SideBar
           tags={tags}

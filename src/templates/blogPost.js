@@ -10,6 +10,7 @@ import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
+import { Divider } from "@mui/material";
 
 const BlogPost = (props) => {
   const { tags, posts, index, pathPrefix, post } = props.pageContext;
@@ -85,6 +86,7 @@ const BlogPost = (props) => {
           />
         </Container>
       </Grid>
+      <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
       <Grid item lg={2} md={3} xs={4}>
         <Container>
           <SideBar sections={section} tags={tags} location={props.location} />

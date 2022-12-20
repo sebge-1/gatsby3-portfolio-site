@@ -27,7 +27,8 @@ const Layout = ({ children, location }) => {
           darkModeActive={darkMode}
           themeSetter={setDarkMode}
         />
-        <Transition location={location}>{children}</Transition> <Footer />
+        <Transition location={location}>{children}</Transition>
+        <Footer />
       </Stack>
     </ThemeProvider>
   );

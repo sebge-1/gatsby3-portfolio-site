@@ -1,47 +1,42 @@
 import * as React from "react";
-import { useState } from "react";
-import MenuList from "@mui/material/MenuList";
-import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Chip from "@mui/material/Chip";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
+import { Box } from "@mui/material";
 
 export default function TagList({ activeTag, setActiveTag, tags }) {
   return (
     <>
       <h1>Tags</h1>
-      <MenuList>
+      <Box>
         {tags.map((tag, index) => (
-          <MenuItem key={index} sx={{ paddingLeft: "0" }}>
-            <ListItemIcon key={index}>
-              <Link to={`/blog/tags/${slugify(tag.tagName)}`} key={index}>
-                <Badge badgeContent={tag.postCount} color="secondary">
-                  <Chip
-                    key={index}
-                    label={tag.tagName}
-                    clickable
-                    sx={{
-                      bgcolor:
-                        activeTag && activeTag === slugify(tag.tagName)
-                          ? "#9E9EFF"
-                          : "",
-                      "&:hover": {
-                        bgcolor:
-                          activeTag && activeTag === slugify(tag.tagName)
-                            ? "#b8b8ff"
-                            : "",
-                      },
-                    }}
-                    onClick={() => setActiveTag(tag.tagName)}
-                  />
-                </Badge>
-              </Link>
-            </ListItemIcon>
-          </MenuItem>
+          <Badge badgeContent={tag.postCount} color="secondary" key={index}>
+            <Link key={index} to={`/blog/tags/${slugify(tag.tagName)}`}>
+              <Chip
+                key={index}
+                label={tag.tagName}
+                clickable
+                sx={{
+                  bgcolor:
+                    activeTag && activeTag === slugify(tag.tagName)
+                      ? "#9E9EFF"
+                      : "",
+                  "&:hover": {
+                    bgcolor:
+                      activeTag && activeTag === slugify(tag.tagName)
+                        ? "#b8b8ff"
+                        : "",
+                  },
+                  m: "2.5px",
+                  p: "5px",
+                }}
+                onClick={() => setActiveTag && setActiveTag(tag.tagName)}
+              />
+            </Link>
+          </Badge>
         ))}
-      </MenuList>
+      </Box>
     </>
   );
 }

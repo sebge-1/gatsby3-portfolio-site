@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import TagList from "./TagList";
-import { Container, Divider } from "@mui/material";
 import TableOfContents from "./TableOfContents";
-import { slugify } from "../utils/slugify";
 
 const SideBar = (props) => {
   return (
-    <>
+    <div
+      style={{
+        position: "fixed",
+        overflowY: "scroll",
+        overflowX: "none",
+        height: "80%",
+        marginLeft: "10px",
+      }}
+    >
       {props.sections && <TableOfContents sections={props.sections} />}
       <TagList
         tags={props.tags}
@@ -15,7 +21,7 @@ const SideBar = (props) => {
         activeTag={props.activeTag}
         tag={props.tag}
       />
-    </>
+    </div>
   );
 };
 

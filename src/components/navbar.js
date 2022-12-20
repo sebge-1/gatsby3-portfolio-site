@@ -13,6 +13,8 @@ import {
   Typography,
   Button,
   Fab,
+  TextField,
+  Autocomplete,
 } from "@mui/material";
 
 import { Link } from "gatsby";
@@ -85,6 +87,22 @@ export default function DrawerAppBar(props) {
           >
             Sebastian Gertz
           </Typography>
+          <Autocomplete
+            freeSolo
+            sx={{ width: 300 }}
+            disableClearable
+            options={[1, 1, 1].map((num) => num)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                label="Search input"
+                InputProps={{
+                  ...params.InputProps,
+                  type: "search",
+                }}
+              />
+            )}
+          />
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
               <Link to={item.slug} key={item.slug}>

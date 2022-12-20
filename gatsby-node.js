@@ -1,5 +1,6 @@
 const path = require("path");
 const createPaginatedPages = require("gatsby-paginate");
+const { slugify } = require("./src/utils/slugify");
 
 module.exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
@@ -14,7 +15,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
             title
             slug
             heroImage {
-              gatsbyImageData
+              gatsbyImageData(height: 300, placeholder: BLURRED)
               description
             }
             tldr {
@@ -39,11 +40,13 @@ module.exports.createPages = async ({ graphql, actions }) => {
   posts.forEach((post) => {
     post.node.tag.forEach((tag) => tagList.add(tag));
   });
-  const tags = [];
+  let tags = [];
   tagList.forEach((tag) => {
     filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
     tags.push({ tagName: tag, postCount: filteredPosts.length });
   });
+  tags = tags.sort((a, b) => (a.tagName > b.tagName ? 1 : -1));
+  console.log(tags);
   // 1. Create Individual Blog Post Pages
   posts.forEach((post, index) => {
     createPage({
@@ -60,7 +63,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
     });
   });
   // 2. Create Tag Pages
-  tagList.forEach((tag) => {
+  [...tagList].sort().forEach((tag) => {
+    const slug = slugify(tag);
     let filteredPosts = posts.filter((post) => post.node.tag.includes(tag));
     let prefix = "/blog/tags";
     createPaginatedPages({
@@ -68,8 +72,8 @@ module.exports.createPages = async ({ graphql, actions }) => {
       createPage,
       pageTemplate: categoryTemplate,
       pageLength: 6,
-      pathPrefix: `${prefix}/${tag}`,
-      context: { tag, tags: [...tags], pathPrefix: `${prefix}/${tag}` },
+      pathPrefix: `${prefix}/${slug}`,
+      context: { slug, tags: [...tags], pathPrefix: `${prefix}/${slug}` },
     });
   });
   // 3. Create Blog List Pages

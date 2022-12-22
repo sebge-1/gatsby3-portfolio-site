@@ -29,7 +29,6 @@ const drawerWidth = 240;
 const navItems = [
   { displayName: "Home", slug: "/" },
   { displayName: "Blog", slug: "/blog" },
-  { displayName: "Projects", slug: "/projects" },
 ];
 
 export default function DrawerAppBar(props) {
@@ -76,20 +75,24 @@ export default function DrawerAppBar(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+            sx={{ mr: 2, display: { md: "none" } }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", sm: "none", md: "block" },
+            }}
           >
             Sebastian Gertz
           </Typography>
+
           <Autocomplete
             freeSolo
-            sx={{ width: 300 }}
+            sx={{ width: 200, marginLeft: "auto" }}
             disableClearable
             options={[1, 1, 1].map((num) => num)}
             renderInput={(params) => (
@@ -103,7 +106,7 @@ export default function DrawerAppBar(props) {
               />
             )}
           />
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+          <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
             {navItems.map((item) => (
               <Link to={item.slug} key={item.slug}>
                 <Button key={item.slug} sx={{ color: "#fff" }}>
@@ -125,16 +128,16 @@ export default function DrawerAppBar(props) {
             >
               Get in touch
             </Button>
-            <IconButton
-              edge="end"
-              color="inherit"
-              aria-label="mode"
-              onClick={() => props.themeSetter(!props.darkModeActive)}
-            >
-              {icon}
-            </IconButton>
             <Modal open={open} handleClick={handleClick} />
           </Box>
+          <IconButton
+            edge="end"
+            color="inherit"
+            aria-label="mode"
+            onClick={() => props.themeSetter(!props.darkModeActive)}
+          >
+            {icon}
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Box component="nav">
@@ -147,7 +150,7 @@ export default function DrawerAppBar(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { sm: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

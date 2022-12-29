@@ -4,7 +4,7 @@ import { BLOCKS, MARKS } from "@contentful/rich-text-types";
 import Highlight from "react-highlight";
 import { renderRichText } from "gatsby-source-contentful/rich-text";
 import "../assets/monokai.css";
-import { Container, Grid, Chip } from "@mui/material";
+import { Container, Grid, Chip, Box } from "@mui/material";
 import InfoBar from "../components/blogInforBar";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
@@ -46,7 +46,16 @@ const BlogPost = (props) => {
 
   return (
     <Grid container>
-      <Grid item lg={10} md={9} xs={8}>
+      <Grid
+        item
+        lg={9}
+        md={9}
+        sm={8}
+        sx={{
+          paddingRight: "10%",
+          paddingLeft: "10%",
+        }}
+      >
         <Container>
           <h1>{title}</h1>
           {tldr.internal.content && (
@@ -61,19 +70,17 @@ const BlogPost = (props) => {
               alt={description || ""}
             />
           )}
-          <div>
+          <Box>
             {tag &&
               tag.map((tag, index) => {
                 const slug = slugify(tag);
                 return (
-                  <Container>
-                    <Link to={`/blog/tags/${slug}`} key={index}>
-                      <Chip key={index} label={tag} clickable />
-                    </Link>
-                  </Container>
+                  <Link to={`/blog/tags/${slug}`} key={index}>
+                    <Chip key={index} label={tag} clickable />
+                  </Link>
                 );
               })}
-          </div>
+          </Box>
           <InfoBar date={publishedDate} content={content} />
           {post && renderRichText(content, options)}
           <PaginationController
@@ -86,11 +93,11 @@ const BlogPost = (props) => {
           />
         </Container>
       </Grid>
+
       <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
-      <Grid item lg={2} md={3} xs={4}>
-        <Container>
-          <SideBar sections={section} tags={tags} location={props.location} />
-        </Container>
+
+      <Grid item lg={3} md={3} sm={4}>
+        <SideBar sections={section} tags={tags} location={props.location} />
       </Grid>
     </Grid>
   );

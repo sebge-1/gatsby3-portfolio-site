@@ -1,16 +1,18 @@
 import React from "react";
 import TagList from "./TagList";
 import TableOfContents from "./TableOfContents";
+import { Container } from "@mui/material";
 
 const SideBar = (props) => {
   return (
-    <div
-      style={{
-        position: "fixed",
-        overflowY: "scroll",
+    <Container
+      sx={{
+        width: "100%",
+        position: "sticky",
+        top: "64px",
         overflowX: "none",
-        height: "80%",
-        marginLeft: "10px",
+        overflowY: "scroll",
+        maxHeight: "calc(100vh - 64px)",
       }}
     >
       {props.sections && <TableOfContents sections={props.sections} />}
@@ -21,7 +23,7 @@ const SideBar = (props) => {
         activeTag={props.activeTag}
         tag={props.tag}
       />
-    </div>
+    </Container>
   );
 };
 

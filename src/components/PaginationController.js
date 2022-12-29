@@ -16,7 +16,6 @@ const PaginationController = ({
   } else {
     pathPrefix = "/blog";
   }
-  console.log(index, pageCount);
   return (
     <Tabs sx={{ margin: 4 }} value={false}>
       {index > 1 && (
@@ -26,7 +25,6 @@ const PaginationController = ({
       {/* show pagination only for paginated components */}
       {!skipPagination &&
         Array.from({ length: pageCount }, (_, idx) => {
-          console.log(pathPrefix);
           return (
             <Tab
               key={idx}

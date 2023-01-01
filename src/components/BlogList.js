@@ -6,6 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import { slugify } from "../utils/slugify";
+import { Container } from "@mui/material";
 
 const BlogList = (props) => {
   return (
@@ -16,8 +17,8 @@ const BlogList = (props) => {
     >
       {props.posts.map((edge, index) => {
         return (
-          <Grid item xs={4} sm={4} md={4} key={index}>
-            <Card sx={{ maxWidth: 400 }} key={index}>
+          <Grid item sm={6} md={4} key={index}>
+            <Card sx={{ height: "100%", maxWidth: "345px" }} key={index}>
               <Link to={`/blog/${edge.node.slug}`}>
                 <CardMedia>
                   {edge.node.heroImage && (
@@ -28,6 +29,20 @@ const BlogList = (props) => {
                   )}
                 </CardMedia>
               </Link>
+              <CardContent>
+                <Typography variant="overline" color="text.secondary">
+                  {edge.node.publishedDate}
+                </Typography>
+                <Link to={`/blog/${edge.node.slug}`}>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {edge.node.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {edge.node.tldr.internal.content}
+                  </Typography>
+                </Link>
+              </CardContent>
+
               <CardContent>
                 {edge.node.tag &&
                   edge.node.tag.map((tag, index) => {
@@ -50,21 +65,12 @@ const BlogList = (props) => {
                                   ? "#b8b8ff"
                                   : "",
                             },
+                            mr: "5px",
                           }}
                         />
                       </Link>
                     );
                   })}
-              </CardContent>
-              <CardContent>
-                <Link to={`/blog/${edge.node.slug}`}>
-                  <Typography gutterBottom variant="h4" component="div">
-                    {edge.node.title}
-                  </Typography>
-                </Link>
-                <Typography variant="h6" color="text.secondary">
-                  {edge.node.publishedDate}
-                </Typography>
               </CardContent>
             </Card>
           </Grid>

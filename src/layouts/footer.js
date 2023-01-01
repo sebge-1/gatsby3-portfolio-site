@@ -1,28 +1,29 @@
-import React from 'react'
-import config from '../config.js';
+import React from "react";
+import Typography from "@mui/material/Typography";
+import GatsyLogo from "../assets/icon-72x72.png";
+import Box from "@mui/material/Box";
+import SocialLinks from "../components/SocialLinks";
 
-export default class Footer extends React.Component {
-  render() {
-    const socialLinks = config.socialLinks
-    const socialLinksMarkup = socialLinks.map(
-      link => {
-        return <li key={link.id}>
-          <a href={link.url} target='_blank' rel='noopener noreferrer'>
-          </a>
-        </li>
-      }
-     )
-    return (
-      <div style={{flex: 0.5}} className="footer-wrapper">
-        <footer className='layout-footer' style={{color: 'rgb(128, 128, 128)'}}>
-          <p style={{padding: 10, fontWeight: 'bold'}}>&#169;
-            2022 Sebastian Gertz</p>
-          <p>Made with <a href="https://www.gatsbyjs.org" target="_blank" rel='noopener noreferrer'>Gatsby.JS</a></p>
-          <ul className="icons">
-            {socialLinksMarkup}
-          </ul>
-        </footer>
-    </div>
-    )
-  }
-}
+const Footer = (props) => (
+  <div style={{ maxWidth: 700, margin: "auto", textAlign: "center" }}>
+    <SocialLinks />
+    <Box
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        paddingTop: "30px",
+        paddingBottom: "50px",
+      }}
+    >
+      <Typography variant="p">Built with</Typography>
+      <img
+        src={GatsyLogo}
+        alt="Gatsby Logo"
+        style={{ height: "30px", paddingLeft: "10px" }}
+      />
+    </Box>
+  </div>
+);
+
+export default Footer;

@@ -112,7 +112,10 @@ export default function DrawerAppBar(props) {
               <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
                 {navItems.map((item) => (
                   <Link to={item.slug} key={item.slug}>
-                    <Button key={item.slug} sx={{ color: "#fff" }}>
+                    <Button
+                      key={item.slug}
+                      sx={{ color: "#fff", ml: "1rem", mr: "1rem" }}
+                    >
                       {item.displayName}
                     </Button>
                   </Link>
@@ -139,6 +142,7 @@ export default function DrawerAppBar(props) {
                 color="inherit"
                 aria-label="mode"
                 onClick={() => props.themeSetter(!props.darkModeActive)}
+                sx={{ ml: "1rem", mr: "1rem" }}
               >
                 {icon}
               </IconButton>
@@ -167,20 +171,7 @@ export default function DrawerAppBar(props) {
         </Box>
       </HideOnScroll>
       <ScrollTop {...props}>
-        <Fab
-          size="small"
-          aria-label="scroll back to top"
-          sx={{
-            position: "fixed",
-            bottom: "2rem",
-            right: "50%",
-            width: "3.5rem",
-            height: "3.5rem",
-            borderRadius: "50%",
-            cursor: "pointer",
-            zIndex: "999",
-          }}
-        >
+        <Fab size="medium" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
         </Fab>
       </ScrollTop>

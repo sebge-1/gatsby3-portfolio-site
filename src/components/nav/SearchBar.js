@@ -12,7 +12,7 @@ const SearchBar = ({ postData }) => {
   return (
     <Autocomplete
       freeSolo
-      sx={{ width: 200, marginLeft: "auto" }}
+      sx={{ width: 200, marginLeft: "auto", mr: "1rem" }}
       disableClearable
       options={postData.allContentfulBlogPost.edges.map((edge) => edge.node)}
       renderInput={(params) => (

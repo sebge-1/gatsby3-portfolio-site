@@ -5,8 +5,8 @@ import Box from "@mui/material/Box";
 import SocialLinks from "../components/SocialLinks";
 
 const Footer = (props) => (
-  <div style={{ maxWidth: 700, margin: "auto", textAlign: "center" }}>
-    <SocialLinks />
+  <div style={{ maxWidth: 700, margin: "2rem auto", textAlign: "center" }}>
+    <SocialLinks spacing={6} size="large" />
     <Box
       sx={{
         alignItems: "center",

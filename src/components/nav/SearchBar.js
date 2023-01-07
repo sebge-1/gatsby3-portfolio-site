@@ -15,6 +15,7 @@ const SearchBar = ({ postData }) => {
       sx={{ width: 200, marginLeft: "auto", mr: "1rem" }}
       disableClearable
       options={postData.allContentfulBlogPost.edges.map((edge) => edge.node)}
+      getOptionLabel={(option) => option.title}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -27,13 +28,13 @@ const SearchBar = ({ postData }) => {
       )}
       filterOptions={filterOptions}
       renderOption={(props, option) => (
-        <>
-          <Link to={`/blog/${option.slug}`}>
+        <li key={option.title}>
+          <Link key={option.title} to={`/blog/${option.slug}`}>
             {option.title}
             <br />
           </Link>
           <Divider orientation="horizontal"></Divider>
-        </>
+        </li>
       )}
     />
   );

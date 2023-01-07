@@ -16,6 +16,8 @@ import {
   Fade,
   useScrollTrigger,
 } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import avatar from "../../assets/avatar.jpeg";
 
 import { Link } from "gatsby";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -25,6 +27,8 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "../ScrollTop";
 import Modal from "./Modal.js";
 import SearchBar from "./SearchBar";
+import SocialLinks from "../SocialLinks";
+import Accordion from "../../components/Accordion";
 
 const drawerWidth = 240;
 const navItems = [
@@ -35,13 +39,12 @@ const navItems = [
 export default function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => setOpen(!open);
+  const [modalOpen, setModalOpen] = React.useState(false);
+  const handleClick = () => setModalOpen(!modalOpen);
 
   function HideOnScroll(props) {
     const { children, window } = props;
@@ -60,16 +63,63 @@ export default function DrawerAppBar(props) {
   }
 
   const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <Typography variant="h5" sx={{ padding: "1rem" }}>
         Sebastian Gertz
       </Typography>
+      <Box
+        sx={{
+          textAlign: "center",
+          margin: "auto",
+        }}
+      >
+        <Avatar
+          alt="Seb Gertz"
+          src={avatar}
+          sx={{
+            height: "80px",
+            width: "80px",
+            margin: "auto",
+          }}
+        ></Avatar>
+        <Box sx={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
+          <SocialLinks spacing={2} size="large" />
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          display: { xs: "block", sm: "none" },
+          textAlign: "center",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Button
+          sx={{
+            display: "inline-block",
+            border: "2px solid #F48FB1",
+            ":hover": {
+              backgroundColor: "#F48FB1",
+            },
+          }}
+          onClick={handleClick}
+        >
+          Get in touch
+        </Button>
+      </Box>
       <Divider />
+
       <List>
         {navItems.map((item, index) => (
           <ListItem key={item.slug} disablePadding>
-            <Link to={`$item.slug`} key={index}>
-              <ListItemButton sx={{ textAlign: "center" }}>
+            <Link to={item.slug} key={index}>
+              <ListItemButton>
                 <ListItemText primary={item.displayName} />
               </ListItemButton>
             </Link>
@@ -98,6 +148,14 @@ export default function DrawerAppBar(props) {
               >
                 <MenuIcon />
               </IconButton>
+              <Avatar
+                alt="Seb Gertz"
+                src={avatar}
+                sx={{
+                  marginRight: "2rem",
+                  display: { xs: "none", sm: "none", md: "block" },
+                }}
+              ></Avatar>
               <Typography
                 variant="h6"
                 component="div"
@@ -120,7 +178,8 @@ export default function DrawerAppBar(props) {
                     </Button>
                   </Link>
                 ))}
-
+              </Box>
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 <Button
                   sx={{
                     display: "inline-block",
@@ -135,8 +194,9 @@ export default function DrawerAppBar(props) {
                 >
                   Get in touch
                 </Button>
-                <Modal open={open} handleClick={handleClick} />
               </Box>
+
+              <Modal modalOpen={modalOpen} handleClick={handleClick} />
               <IconButton
                 edge="end"
                 color="inherit"

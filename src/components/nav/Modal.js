@@ -3,7 +3,6 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
 import ContactForm from "./ContactForm";
 
 const style = {
@@ -18,13 +17,13 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({ open, handleClick }) {
+export default function TransitionsModal({ modalOpen, handleClick }) {
   return (
     <div>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
+        open={modalOpen}
         onClose={handleClick}
         closeAfterTransition
         BackdropComponent={Backdrop}
@@ -32,7 +31,7 @@ export default function TransitionsModal({ open, handleClick }) {
           timeout: 500,
         }}
       >
-        <Fade in={open}>
+        <Fade in={modalOpen}>
           <Box sx={style}>
             <ContactForm />
           </Box>

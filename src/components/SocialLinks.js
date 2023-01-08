@@ -6,25 +6,25 @@ import * as React from "react";
 import { Link, IconButton } from "@mui/material";
 import { Grid } from "@mui/material";
 
-const SocialLinks = () => {
+const SocialLinks = ({ spacing, size }) => {
   return (
-    <Grid container justify={"center"} spacing={6} sx={{ marginTop: "20px" }}>
+    <Grid container spacing={spacing}>
       <Grid item>
         <Link
           component={IconButton}
           href="https://www.linkedin.com/in/sebastian-gertz"
         >
-          <LinkedInIcon fontSize="large" />
+          <LinkedInIcon fontSize={size} />
         </Link>
       </Grid>
       <Grid item>
         <Link component={IconButton} href="https://github.com/sebge-1">
-          <GitHubIcon fontSize="large" />
+          <GitHubIcon fontSize={size} />
         </Link>
       </Grid>
       <Grid item>
         <Link component={IconButton} href="mailto: me@email.com">
-          <EmailIcon fontSize="large" />
+          <EmailIcon fontSize={size} />
         </Link>
       </Grid>
     </Grid>

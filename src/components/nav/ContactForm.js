@@ -83,7 +83,11 @@ function ContactForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button style={{ width: "100%" }} variant="contained">
+              <Button
+                style={{ width: "100%" }}
+                variant="contained"
+                type="submit"
+              >
                 Send Message
               </Button>
               <Snackbar

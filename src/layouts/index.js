@@ -44,7 +44,9 @@ const Layout = ({ children, location }) => {
           themeSetter={setDarkMode}
           postData={postData}
         />
-        <Transition location={location}>{children}</Transition>
+        {/* <Transition location={location}> */}
+        {children}
+        {/* </Transition> */}
         <Footer />
       </Stack>
     </ThemeProvider>

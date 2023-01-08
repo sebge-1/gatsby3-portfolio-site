@@ -123,55 +123,51 @@ function ContactForm() {
               Don’t fill this out: <input name="bot-field" />
             </label>
           </p>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <input
-                type="text"
-                name="name"
-                maxLength="100"
-                required="required"
-                size="60"
-                placeholder="Name"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <input
-                type="text"
-                name="email"
-                maxLength="100"
-                required="required"
-                size="60"
-                placeholder="you@email.com"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <input
-                type="text"
-                name="subject"
-                maxLength="200"
-                size="60"
-                placeholder="Subject (optional)"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <textarea
-                name="message"
-                required="required"
-                maxLength="2000"
-                cols="6"
-                rows="9"
-                placeholder="Your message goes here..."
-              ></textarea>
-            </Grid>
+          {/* <Grid container spacing={2}>
+            <Grid item xs={6}> */}
+          <input
+            type="text"
+            name="name"
+            maxLength="100"
+            required="required"
+            size="60"
+            placeholder="Name"
+          />
+          {/* </Grid>
+            <Grid item xs={12}> */}
+          <input
+            type="text"
+            name="email"
+            maxLength="100"
+            required="required"
+            size="60"
+            placeholder="you@email.com"
+          />
+          {/* </Grid>
+            <Grid item xs={12}> */}
+          <input
+            type="text"
+            name="subject"
+            maxLength="200"
+            size="60"
+            placeholder="Subject (optional)"
+          />
+          {/* </Grid>
+            <Grid item xs={12}> */}
+          <textarea
+            name="message"
+            required="required"
+            maxLength="2000"
+            cols="6"
+            rows="9"
+            placeholder="Your message goes here..."
+          ></textarea>
+          {/* </Grid> */}
 
-            <Grid item xs={12}>
-              <button
-                className="send-button"
-                type="submit"
-                value="Submit"
-              ></button>
-            </Grid>
-          </Grid>
+          {/* <Grid item xs={12}> */}
+          <button className="send-button" type="submit" value="Submit"></button>
+          {/* </Grid>
+          </Grid> */}
         </form>
       </Box>
     </div>

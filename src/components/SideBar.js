@@ -16,6 +16,7 @@ const SideBar = (props) => {
       }}
     >
       {props.sections && <TableOfContents sections={props.sections} />}
+      <h1>All Tags</h1>
       <TagList
         tags={props.tags}
         location={props.location}

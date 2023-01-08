@@ -5,11 +5,12 @@ const TableOfContents = ({ sections, index }) => {
   return (
     <>
       <h2>Contents</h2>
-      {sections.map((section, index) => (
-        <a href={`#${slugify(section)}`} key={index}>
-          <h4>{section}</h4>
-        </a>
-      ))}
+      {sections &&
+        sections.map((section, index) => (
+          <a href={`#${slugify(section)}`} key={index}>
+            <h4>{section}</h4>
+          </a>
+        ))}
     </>
   );
 };

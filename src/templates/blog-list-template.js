@@ -1,8 +1,9 @@
 import React from "react";
 import BlogList from "../components/BlogList";
-import { Container, Grid, Divider } from "@mui/material";
+import { Container, Grid, Divider, Box } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
+import TagList from "../components/TagList";
 
 export default function BlogListTemplate({ pageContext, location }) {
   const { pageCount, group, index, tags, pathPrefix } = pageContext;
@@ -12,9 +13,15 @@ export default function BlogListTemplate({ pageContext, location }) {
 
   return (
     <Grid container>
-      <Grid item lg={10} md={9} xs={8}>
+      <Grid item lg={10} md={9} sm={12} xs={12}>
         <Container>
           <h1>Read articles from {pageCount} pages </h1>
+          <Box
+            display={{ sm: "block", md: "none" }}
+            sx={{ marginBottom: "5rem" }}
+          >
+            <TagList tags={tags} />
+          </Box>
           <BlogList posts={group} location={location} />
           <PaginationController
             previousUrl={previousUrl}
@@ -26,9 +33,15 @@ export default function BlogListTemplate({ pageContext, location }) {
         </Container>
       </Grid>
       <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
-      <Grid item lg={2} md={3} xs={4}>
+      <Box
+        component={Grid}
+        item
+        lg={2}
+        md={3}
+        display={{ xs: "none", sm: "none", md: "inline" }}
+      >
         <SideBar tags={tags} location={location} />
-      </Grid>
+      </Box>
     </Grid>
   );
 }

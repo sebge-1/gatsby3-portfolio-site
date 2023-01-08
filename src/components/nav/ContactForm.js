@@ -4,12 +4,19 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { navigate } from "gatsby-link";
 // Packages
 import React, { useState } from "react";
 // Components
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
+
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+}
 
 function ContactForm() {
   const [firstName, setFirstName] = useState("");
@@ -18,6 +25,25 @@ function ContactForm() {
   const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        firstName,
+        lastName,
+        email,
+        subject,
+        content,
+      }),
+    })
+      .then(() => navigate(form.getAttribute("action")))
+      .catch((error) => alert(error));
+  };
 
   return (
     <div>
@@ -29,6 +55,7 @@ function ContactForm() {
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact-form" />
           <Grid container spacing={2}>

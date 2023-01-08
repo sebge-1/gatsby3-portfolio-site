@@ -4,8 +4,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { navigate } from "gatsby-link";
-// Packages
+import { navigate } from "gatsby-link"; // Packages
 import React, { useState } from "react";
 // Components
 const Alert = React.forwardRef(function Alert(props, ref) {
@@ -25,11 +24,26 @@ function ContactForm() {
 
   const [open, setOpen] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...state,
+      }),
+    })
+      .then(() => navigate(form.getAttribute("action")))
+      .catch((error) => alert(error));
+  };
+
   return (
     <div>
       <h2>Contact Form</h2>
       <Box sx={{ flexGrow: 1, mx: "2%" }}>
-        {/* <form
+        <form
           id="contact-form"
           name="contact-form"
           method="post"
@@ -109,7 +123,7 @@ function ContactForm() {
               </label>
             </p>
           </Grid>
-        </form> */}
+        </form>
         <form
           id="contact-form"
           name="contact-form"

@@ -15,7 +15,7 @@ module.exports.createPages = async ({ graphql, actions }) => {
             title
             slug
             heroImage {
-              gatsbyImageData(height: 300, placeholder: BLURRED)
+              gatsbyImageData(height: 400, width: 700, placeholder: BLURRED)
               description
             }
             tldr {
@@ -46,7 +46,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     tags.push({ tagName: tag, postCount: filteredPosts.length });
   });
   tags = tags.sort((a, b) => (a.tagName > b.tagName ? 1 : -1));
-  console.log(tags);
   // 1. Create Individual Blog Post Pages
   posts.forEach((post, index) => {
     createPage({

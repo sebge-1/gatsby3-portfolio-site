@@ -19,11 +19,11 @@ function encode(data) {
 }
 
 function ContactForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [content, setContent] = useState("");
+  const [state, setState] = React.useState({});
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
   const [open, setOpen] = useState(false);
 
   const handleSubmit = (e) => {
@@ -34,11 +34,7 @@ function ContactForm() {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        firstName,
-        lastName,
-        email,
-        subject,
-        content,
+        ...state,
       }),
     })
       .then(() => navigate(form.getAttribute("action")))
@@ -61,8 +57,7 @@ function ContactForm() {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <TextField
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="First name"
@@ -71,8 +66,7 @@ function ContactForm() {
             </Grid>
             <Grid item xs={6}>
               <TextField
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Last name"
@@ -81,8 +75,7 @@ function ContactForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Email"
@@ -91,8 +84,7 @@ function ContactForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setSubject(e.target.value)}
-                value={subject}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Subject"
@@ -101,8 +93,7 @@ function ContactForm() {
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 placeholder="Enter reason for contact"
                 multiline

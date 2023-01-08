@@ -114,8 +114,8 @@ function ContactForm() {
           id="contact-form"
           name="contact-form"
           method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
+          netlify="true"
+          netlify-honeypot="bot-field"
         >
           <input type="hidden" name="form-name" value="contact-form" />
           <p hidden>

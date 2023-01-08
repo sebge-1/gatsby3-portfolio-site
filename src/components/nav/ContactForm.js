@@ -48,7 +48,8 @@ function ContactForm() {
         <form
           id="contact-form"
           name="contact-form"
-          method="POST"
+          method="post"
+          action="/thanks/"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}

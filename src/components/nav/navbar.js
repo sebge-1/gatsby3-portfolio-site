@@ -28,7 +28,6 @@ import ScrollTop from "../ScrollTop";
 import Modal from "./Modal.js";
 import SearchBar from "./SearchBar";
 import SocialLinks from "../SocialLinks";
-import Accordion from "../../components/Accordion";
 
 const drawerWidth = 240;
 const navItems = [

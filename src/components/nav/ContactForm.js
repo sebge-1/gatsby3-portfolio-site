@@ -23,19 +23,6 @@ function ContactForm() {
     console.log(state);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const form = e.target;
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({
-        "form-name": form.getAttribute("name"),
-        ...state,
-      }),
-    }).catch((error) => alert(error));
-  };
-
   return (
     <div>
       <h2>Contact Form</h2>
@@ -46,7 +33,6 @@ function ContactForm() {
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact" />
           <Grid container spacing={2}>

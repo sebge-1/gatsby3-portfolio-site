@@ -6,18 +6,34 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 // Packages
 import React, { useState } from "react";
-// Components
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+
+function encode(data) {
+  return Object.keys(data)
+    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+}
 
 function ContactForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [content, setContent] = useState("");
   const [open, setOpen] = useState(false);
+
+  const [state, setState] = React.useState({});
+
+  const handleChange = (e) => {
+    setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...state,
+      }),
+    }).catch((error) => alert(error));
+  };
 
   return (
     <div>
@@ -34,52 +50,52 @@ function ContactForm() {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <TextField
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="First name"
                 placeholder="Enter first name..."
+                name="firstName"
               />
             </Grid>
             <Grid item xs={6}>
               <TextField
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Last name"
                 placeholder="Enter last name..."
+                name="lastName"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Email"
                 placeholder="Enter contact email..."
+                name="email"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setSubject(e.target.value)}
-                value={subject}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
                 label="Subject"
                 placeholder="Enter subject regards..."
+                name="subject"
               />
             </Grid>
             <Grid item xs={12}>
               <TextField
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
+                onChange={handleChange}
                 style={{ width: "100%" }}
                 placeholder="Enter reason for contact"
                 multiline
                 rows={4}
+                name="content"
               />
             </Grid>
             <Grid item xs={12}>
@@ -90,15 +106,6 @@ function ContactForm() {
               >
                 Send Message
               </Button>
-              <Snackbar
-                open={open}
-                autoHideDuration={3000}
-                anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-              >
-                <Alert severity="success" sx={{ width: "100%" }}>
-                  Message Sent!
-                </Alert>
-              </Snackbar>
             </Grid>
             <p hidden>
               <label>

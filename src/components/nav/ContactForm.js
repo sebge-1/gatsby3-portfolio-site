@@ -28,34 +28,25 @@ function ContactForm() {
       <h2>Contact Form</h2>
       <Box sx={{ flexGrow: 1, mx: "2%" }}>
         <form
-          id="contact"
-          name="contact"
+          id="contact-form"
+          name="contact-form"
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
         >
-          <input type="hidden" name="form-name" value="contact" />
+          <input type="hidden" name="form-name" value="contact-form" />
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
               <TextField
                 onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
-                label="First Name"
-                placeholder="Enter first name..."
-                name="firstName"
+                label="Name"
+                placeholder="Enter your name..."
+                name="name"
               />
             </Grid>
-            <Grid item xs={6}>
-              <TextField
-                onChange={handleChange}
-                style={{ width: "100%" }}
-                id="outlined-error-helper-text"
-                label="Last Name"
-                placeholder="Enter last name..."
-                name="lastName"
-              />
-            </Grid>
+
             <Grid item xs={12}>
               <TextField
                 onChange={handleChange}

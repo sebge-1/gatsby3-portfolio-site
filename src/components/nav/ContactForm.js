@@ -20,6 +20,7 @@ function ContactForm() {
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
+    console.log(state);
   };
 
   const handleSubmit = (e) => {
@@ -45,6 +46,7 @@ function ContactForm() {
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
         >
           <input type="hidden" name="form-name" value="contact-form" />
           <Grid container spacing={2}>
@@ -53,7 +55,7 @@ function ContactForm() {
                 onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
-                label="First name"
+                label="First Name"
                 placeholder="Enter first name..."
                 name="firstName"
               />
@@ -63,7 +65,7 @@ function ContactForm() {
                 onChange={handleChange}
                 style={{ width: "100%" }}
                 id="outlined-error-helper-text"
-                label="Last name"
+                label="Last Name"
                 placeholder="Enter last name..."
                 name="lastName"
               />
@@ -95,6 +97,7 @@ function ContactForm() {
                 placeholder="Enter reason for contact"
                 multiline
                 rows={4}
+                label="Your message"
                 name="content"
               />
             </Grid>

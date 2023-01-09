@@ -41,14 +41,14 @@ function ContactForm() {
       <h2>Contact Form</h2>
       <Box sx={{ flexGrow: 1, mx: "2%" }}>
         <form
-          id="contact-form"
-          name="contact-form"
+          id="contact"
+          name="contact"
           method="POST"
           data-netlify="true"
           data-netlify-honeypot="bot-field"
           onSubmit={handleSubmit}
         >
-          <input type="hidden" name="form-name" value="contact-form" />
+          <input type="hidden" name="form-name" value="contact" />
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <TextField
@@ -98,7 +98,7 @@ function ContactForm() {
                 multiline
                 rows={4}
                 label="Your message"
-                name="content"
+                name="message"
               />
             </Grid>
             <Grid item xs={12}>

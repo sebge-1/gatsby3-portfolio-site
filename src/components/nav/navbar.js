@@ -28,6 +28,26 @@ import ScrollTop from "../ScrollTop";
 import Modal from "./Modal.js";
 import SearchBar from "./SearchBar";
 import SocialLinks from "../SocialLinks";
+import { createTheme, ThemeProvider } from "@mui/material";
+
+const navBarLight = createTheme({
+  components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        root: {
+          "&:hover .MuiOutlinedInput-notchedOutline": {
+            borderRadius: 3,
+            borderColor: "#FDECF2",
+          },
+          "& .MuiOutlinedInput-notchedOutline": {
+            borderRadius: 3,
+            borderColor: "#F48FB1",
+          },
+        },
+      },
+    },
+  },
+});
 
 const drawerWidth = 240;
 const navItems = [
@@ -52,10 +72,11 @@ export default function DrawerAppBar(props) {
     // This is only being set here because the demo is in an iframe.
     const trigger = useScrollTrigger({
       target: window ? window() : undefined,
+      threshold: 300,
     });
 
     return (
-      <Fade appear={false} in={!trigger}>
+      <Fade appear={false} in={!trigger} timeout={5}>
         {children}
       </Fade>
     );
@@ -165,7 +186,9 @@ export default function DrawerAppBar(props) {
               >
                 Sebastian Gertz
               </Typography>
-              <SearchBar postData={props.postData} />
+              <ThemeProvider theme={navBarLight}>
+                <SearchBar postData={props.postData} />
+              </ThemeProvider>
               <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
                 {navItems.map((item) => (
                   <Link to={item.slug} key={item.slug}>

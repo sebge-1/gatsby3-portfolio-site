@@ -20,9 +20,13 @@ const SearchBar = ({ postData }) => {
         <TextField
           {...params}
           label="Search Posts"
+          sx={{ input: { color: "#fff" } }}
           InputProps={{
             ...params.InputProps,
             type: "search",
+          }}
+          InputLabelProps={{
+            style: { color: "#fff" },
           }}
         />
       )}

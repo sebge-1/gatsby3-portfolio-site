@@ -1,7 +1,6 @@
 const getActiveTagfromPath = (pathname) => {
   let pathEndIndex = -2;
   const pathEnding = pathname.split("/").at(pathEndIndex);
-  console.log(pathEnding);
   return isNaN(parseInt(pathEnding))
     ? pathEnding
     : pathname.split("/").at(pathEndIndex - 1);

@@ -7,12 +7,6 @@ import MuiAlert from "@mui/material/Alert";
 // Packages
 import React, { useState } from "react";
 
-function encode(data) {
-  return Object.keys(data)
-    .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-}
-
 function ContactForm() {
   const [open, setOpen] = useState(false);
 

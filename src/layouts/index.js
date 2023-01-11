@@ -13,6 +13,11 @@ import light from "../themes/light.js";
 import { useStaticQuery, graphql, Link } from "gatsby";
 
 const Layout = ({ children, location }) => {
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line global-require
+    require("smooth-scroll")('a[href*="#"]');
+  }
+
   const [darkMode, setDarkMode] = useState(false);
   const activeTheme = createTheme(darkMode ? light : dark);
 

@@ -16,8 +16,6 @@ import {
   Fade,
   useScrollTrigger,
 } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
-import avatar from "../../assets/avatar.jpeg";
 
 import { Link } from "gatsby";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
@@ -29,6 +27,7 @@ import Modal from "./Modal.js";
 import SearchBar from "./SearchBar";
 import SocialLinks from "../SocialLinks";
 import { createTheme, ThemeProvider } from "@mui/material";
+import { StaticImage } from "gatsby-plugin-image";
 
 const navBarLight = createTheme({
   components: {
@@ -100,15 +99,16 @@ export default function DrawerAppBar(props) {
           margin: "auto",
         }}
       >
-        <Avatar
-          alt="Seb Gertz"
-          src={avatar}
-          sx={{
-            height: "80px",
-            width: "80px",
-            margin: "auto",
+        <StaticImage
+          src="../../images/avatar.jpeg"
+          style={{
+            borderRadius: "50%",
+            width: "50px",
+            height: "50px",
+            marginRight: "1rem",
           }}
-        ></Avatar>
+          alt="Seb Gertz"
+        />
         <Box sx={{ paddingTop: "1rem", paddingBottom: "1rem" }}>
           <SocialLinks spacing={2} size="large" />
         </Box>
@@ -168,14 +168,17 @@ export default function DrawerAppBar(props) {
               >
                 <MenuIcon />
               </IconButton>
-              <Avatar
-                alt="Seb Gertz"
-                src={avatar}
-                sx={{
-                  marginRight: "2rem",
-                  display: { xs: "none", sm: "none", md: "block" },
+
+              <StaticImage
+                src="../../images/avatar.jpeg"
+                style={{
+                  borderRadius: "50%",
+                  width: "50px",
+                  height: "50px",
+                  marginRight: "1rem",
                 }}
-              ></Avatar>
+                alt="Seb Gertz"
+              />
               <Typography
                 variant="h6"
                 component="div"

@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import GatsyLogo from "../assets/icon-72x72.png";
 import Box from "@mui/material/Box";
 import SocialLinks from "../components/SocialLinks";
+import { StaticImage } from "gatsby-plugin-image";
 
 const Footer = (props) => (
   <div style={{ maxWidth: 700, margin: "2rem auto", textAlign: "center" }}>
@@ -17,10 +18,10 @@ const Footer = (props) => (
       }}
     >
       <Typography variant="p">Built with</Typography>
-      <img
-        src={GatsyLogo}
+      <StaticImage
+        src="../assets/icon-72x72.png"
         alt="Gatsby Logo"
-        style={{ height: "30px", paddingLeft: "10px" }}
+        style={{ marginLeft: "0.5rem", width: "30px", height: "30px" }}
       />
     </Box>
   </div>

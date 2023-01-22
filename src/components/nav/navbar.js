@@ -26,27 +26,9 @@ import ScrollTop from "../ScrollTop";
 import Modal from "./Modal.js";
 import SearchBar from "./SearchBar";
 import SocialLinks from "../SocialLinks";
-import { createTheme, ThemeProvider } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
-
-const navBarLight = createTheme({
-  components: {
-    MuiOutlinedInput: {
-      styleOverrides: {
-        root: {
-          "&:hover .MuiOutlinedInput-notchedOutline": {
-            borderRadius: 3,
-            borderColor: "#FDECF2",
-          },
-          "& .MuiOutlinedInput-notchedOutline": {
-            borderRadius: 3,
-            borderColor: "#F48FB1",
-          },
-        },
-      },
-    },
-  },
-});
+import navBarLight from "../../themes/navBarLight";
 
 const drawerWidth = 240;
 const navItems = [
@@ -105,7 +87,6 @@ export default function DrawerAppBar(props) {
             borderRadius: "50%",
             width: "50px",
             height: "50px",
-            marginRight: "1rem",
           }}
           alt="Seb Gertz"
         />
@@ -198,6 +179,7 @@ export default function DrawerAppBar(props) {
                     <Button
                       key={item.slug}
                       sx={{ color: "#fff", ml: "1rem", mr: "1rem" }}
+                      className="underline"
                     >
                       {item.displayName}
                     </Button>

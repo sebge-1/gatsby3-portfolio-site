@@ -120,7 +120,7 @@ export default function DrawerAppBar(props) {
         {navItems.map((item, index) => (
           <ListItem key={item.slug} disablePadding>
             <Link to={item.slug} key={index}>
-              <ListItemButton>
+              <ListItemButton className="underline">
                 <ListItemText primary={item.displayName} />
               </ListItemButton>
             </Link>
@@ -149,17 +149,18 @@ export default function DrawerAppBar(props) {
               >
                 <MenuIcon />
               </IconButton>
-
-              <StaticImage
-                src="../../images/avatar.jpeg"
-                style={{
-                  borderRadius: "50%",
-                  width: "50px",
-                  height: "50px",
-                  marginRight: "1rem",
-                }}
-                alt="Seb Gertz"
-              />
+              <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+                <StaticImage
+                  src="../../images/avatar.jpeg"
+                  style={{
+                    borderRadius: "50%",
+                    width: "50px",
+                    height: "50px",
+                    marginRight: "1rem",
+                  }}
+                  alt="Seb Gertz"
+                />
+              </Box>
               <Typography
                 variant="h6"
                 component="div"

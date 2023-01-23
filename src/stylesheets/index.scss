@@ -14,3 +14,23 @@
   background-color: #9E9EFF;
   filter: brightness(110%);
 }
+.underline {
+  text-decoration: none;
+  position: relative;
+  // color: #000;
+}
+
+.underline::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #F48FB1;
+  transition: width 0.3s ease-in-out;
+}
+
+.underline:hover::before {
+  width: 100%;
+}

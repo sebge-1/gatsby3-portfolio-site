@@ -13,6 +13,7 @@ const SideBar = (props) => {
         overflowX: "none",
         overflowY: "scroll",
         maxHeight: "calc(100vh - 64px)",
+        marginTop: "1rem",
       }}
     >
       {props.sections && <TableOfContents sections={props.sections} />}

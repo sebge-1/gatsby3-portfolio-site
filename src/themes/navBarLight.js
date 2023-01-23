@@ -7,11 +7,11 @@ const navBarLight = createTheme({
         root: {
           "&:hover .MuiOutlinedInput-notchedOutline": {
             borderRadius: 3,
-            borderColor: "#FDECF2",
+            borderColor: "#fff",
           },
           "& .MuiOutlinedInput-notchedOutline": {
             borderRadius: 3,
-            borderColor: "#F48FB1",
+            borderColor: "#e3d4d9",
           },
         },
       },

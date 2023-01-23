@@ -6,7 +6,7 @@ import { slugify } from "../utils/slugify";
 
 export default function TagList({ activeTag, setActiveTag, tags }) {
   return (
-    <>
+    <div style={{ marginBottom: "2rem" }}>
       {tags.map((tag, index) => (
         <Badge badgeContent={tag.postCount} color="secondary" key={index}>
           <Link key={index} to={`/blog/tags/${slugify(tag.tagName)}`}>
@@ -32,6 +32,6 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
           </Link>
         </Badge>
       ))}
-    </>
+    </div>
   );
 }

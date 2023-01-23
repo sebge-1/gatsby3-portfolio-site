@@ -4,7 +4,7 @@ import { slugify } from "../utils/slugify";
 const TableOfContents = ({ sections, index }) => {
   return (
     <>
-      <h2>Contents</h2>
+      <h1>Contents</h1>
       {sections &&
         sections.map((section, index) => (
           <a href={`#${slugify(section)}`} key={index}>

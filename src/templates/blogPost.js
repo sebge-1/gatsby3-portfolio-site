@@ -58,7 +58,7 @@ const BlogPost = (props) => {
           paddingLeft: "10%",
         }}
       >
-        <Container sx={{ my: "10px" }}>
+        <Container sx={{ marginTop: "2rem" }}>
           <Typography variant="overline" color="text.secondary" component="div">
             {publishedDate}
           </Typography>
@@ -128,7 +128,7 @@ const BlogPost = (props) => {
         item
         lg={3}
         md={3}
-        display={{ sm: "none", md: "block" }}
+        display={{ xs: "none", sm: "none", md: "block" }}
       >
         <SideBar sections={section} tags={tags} location={props.location} />
       </Box>

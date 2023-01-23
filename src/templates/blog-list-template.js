@@ -17,7 +17,7 @@ export default function BlogListTemplate({ pageContext, location }) {
         <Container>
           <h1>Read articles from {pageCount} pages </h1>
           <Box
-            display={{ sm: "block", md: "none" }}
+            display={{ xs: "block", sm: "block", md: "none" }}
             sx={{ marginBottom: "5rem" }}
           >
             <TagList tags={tags} />

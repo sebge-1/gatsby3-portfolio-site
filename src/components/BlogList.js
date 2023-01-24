@@ -28,6 +28,9 @@ const BlogList = (props) => {
                 sm: "90%",
                 xs: "90%",
               },
+              ":hover": {
+                boxShadow: "10px 10px 5px 0px rgba(212,190,212,1)",
+              },
             }}
           >
             <Box

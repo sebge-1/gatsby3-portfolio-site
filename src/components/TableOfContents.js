@@ -1,17 +1,30 @@
 import * as React from "react";
 import { slugify } from "../utils/slugify";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Link,
+} from "@mui/material";
 
 const TableOfContents = ({ sections, index }) => {
   return (
-    <>
+    <List>
       <h1>Contents</h1>
+
       {sections &&
         sections.map((section, index) => (
-          <a href={`#${slugify(section)}`} key={index}>
-            <h4>{section}</h4>
-          </a>
+          <ListItem>
+            <Link href={`#${slugify(section)}`} key={index}>
+              <ListItemText
+                className="underline"
+                primary={section}
+              ></ListItemText>
+            </Link>
+          </ListItem>
         ))}
-    </>
+    </List>
   );
 };
 

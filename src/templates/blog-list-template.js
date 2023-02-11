@@ -1,9 +1,10 @@
 import React from "react";
 import BlogList from "../components/BlogList";
-import { Container, Grid, Divider, Box } from "@mui/material";
+import { Stack, Grid, Divider, Box } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import TagList from "../components/TagList";
+import Banner from "../components/Banner";
 
 export default function BlogListTemplate({ pageContext, location }) {
   const { pageCount, group, index, tags, pathPrefix } = pageContext;
@@ -13,9 +14,19 @@ export default function BlogListTemplate({ pageContext, location }) {
 
   return (
     <Grid container>
-      <Grid item lg={10} md={9} sm={12} xs={12}>
-        <Container>
-          <h1>Read articles from {pageCount} pages </h1>
+      <Grid
+        item
+        lg={10}
+        md={9}
+        sm={12}
+        xs={12}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Banner></Banner>
+        <h1>Read articles from {pageCount} pages </h1>
+        <Stack spacing={2}>
           <Box
             display={{ xs: "block", sm: "block", md: "none" }}
             sx={{ marginBottom: "5rem" }}
@@ -30,7 +41,7 @@ export default function BlogListTemplate({ pageContext, location }) {
             index={index}
             pathPrefix={pathPrefix}
           />
-        </Container>
+        </Stack>
       </Grid>
       <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
       <Box

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import BlogList from "../components/BlogList";
-import { Container, Grid, Box } from "@mui/material";
+import { Stack, Grid, Box } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import getActiveTagfromPath from "../utils/getActiveTagfromPath";
 import { Divider } from "@mui/material";
 import TagList from "../components/TagList";
+import Banner from "../components/Banner";
 
 export default function CategoryListTemplate({ pageContext, location }) {
   const { pageCount, group, index, slug: tag, tags, pathPrefix } = pageContext;
@@ -20,11 +21,22 @@ export default function CategoryListTemplate({ pageContext, location }) {
 
   return (
     <Grid container divider={<Divider orientation="vertical" />}>
-      <Grid item lg={10} md={9} sm={12} xs={12}>
-        <Container>
-          <h1>Read articles from {pageCount} pages </h1>
+      <Grid
+        item
+        lg={10}
+        md={9}
+        sm={12}
+        xs={12}
+        container
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Banner></Banner>
+
+        <h1>Read articles from {pageCount} pages </h1>
+        <Stack spacing={2}>
           <Box
-            display={{ sm: "block", md: "none" }}
+            display={{ xs: "block", sm: "block", md: "none" }}
             sx={{ marginBottom: "5rem" }}
           >
             <TagList
@@ -49,7 +61,7 @@ export default function CategoryListTemplate({ pageContext, location }) {
             pathPrefix={pathPrefix}
             index={index}
           />
-        </Container>
+        </Stack>
       </Grid>
       <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
       <Box

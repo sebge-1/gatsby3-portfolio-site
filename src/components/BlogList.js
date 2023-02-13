@@ -6,8 +6,11 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import { slugify } from "../utils/slugify";
+import { useTheme } from "@mui/material/styles";
 
 const BlogList = (props) => {
+  const activeTheme = useTheme();
+
   return (
     <Stack
       spacing={{ xs: 2, md: 3 }}
@@ -32,6 +35,7 @@ const BlogList = (props) => {
                 boxShadow: "10px 10px 5px 0px rgba(212,190,212,1)",
               },
             }}
+            raised={true}
           >
             <Box
               key={index}
@@ -51,7 +55,7 @@ const BlogList = (props) => {
                     image={edge.node.heroImage.gatsbyImageData}
                     alt={edge.node.heroImage.description}
                     style={{
-                      width: "200px",
+                      width: "150px",
                       height: "100%",
                     }}
                     imgStyle={{
@@ -94,12 +98,18 @@ const BlogList = (props) => {
                             sx={{
                               bgcolor:
                                 props.activeTag && props.activeTag === slug
-                                  ? "#9E9EFF"
+                                  ? `${activeTheme.palette.primary.main}`
                                   : "",
                               "&:hover": {
                                 bgcolor:
                                   props.activeTag && props.activeTag === slug
-                                    ? "#b8b8ff"
+                                    ? `${activeTheme.palette.primary.light}`
+                                    : "",
+                              },
+                              "& .MuiChip-label": {
+                                color:
+                                  props.activeTag && props.activeTag === slug
+                                    ? `white`
                                     : "",
                               },
                               mr: "5px",

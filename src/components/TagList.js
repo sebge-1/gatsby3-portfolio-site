@@ -3,8 +3,11 @@ import Badge from "@mui/material/Badge";
 import Chip from "@mui/material/Chip";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
+import { useTheme } from "@mui/material/styles";
 
 export default function TagList({ activeTag, setActiveTag, tags }) {
+  const activeTheme = useTheme();
+
   return (
     <div style={{ marginBottom: "2rem" }}>
       {tags.map((tag, index) => (
@@ -17,12 +20,18 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
               sx={{
                 bgcolor:
                   activeTag && activeTag === slugify(tag.tagName)
-                    ? "#9E9EFF"
+                    ? `${activeTheme.palette.primary.main}`
                     : "",
                 "&:hover": {
                   bgcolor:
                     activeTag && activeTag === slugify(tag.tagName)
-                      ? "#b8b8ff"
+                      ? `${activeTheme.palette.primary.light}`
+                      : "",
+                },
+                "& .MuiChip-label": {
+                  color:
+                    activeTag && activeTag === slugify(tag.tagName)
+                      ? `white`
                       : "",
                 },
                 m: "2.5px",

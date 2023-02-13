@@ -17,7 +17,7 @@ const PaginationController = ({
     pathPrefix = "/blog";
   }
   return (
-    <Tabs sx={{ margin: 4 }} value={false}>
+    <Tabs centered value={false}>
       {index > 1 && (
         <Tab to={previousUrl} label="Previous" component={Link}></Tab>
       )}

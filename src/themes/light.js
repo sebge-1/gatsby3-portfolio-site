@@ -3,6 +3,7 @@ module.exports = {
     mode: "light",
     primary: {
       main: "#3F51B5",
+      light: "#5C6BC0",
     },
     secondary: {
       main: "#f48fb1",

@@ -1,6 +1,6 @@
 import React from "react";
 import BlogList from "../components/BlogList";
-import { Stack, Grid, Divider, Box } from "@mui/material";
+import { Stack, Grid, Divider, Box, Container } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import TagList from "../components/TagList";
@@ -15,7 +15,6 @@ export default function BlogListTemplate({ pageContext, location }) {
   return (
     <Grid container>
       <Grid
-        item
         lg={10}
         md={9}
         sm={12}
@@ -25,14 +24,16 @@ export default function BlogListTemplate({ pageContext, location }) {
         alignItems="center"
       >
         <Banner></Banner>
-        <h1>Read articles from {pageCount} pages </h1>
-        <Stack spacing={2}>
+        <Container sx={{ textAlign: "center" }}>
+          {/* <h1>Read articles from {pageCount} pages </h1> */}
           <Box
             display={{ xs: "block", sm: "block", md: "none" }}
-            sx={{ marginBottom: "5rem" }}
+            sx={{ marginBottom: "2rem" }}
           >
             <TagList tags={tags} />
           </Box>
+        </Container>
+        <Stack spacing={2}>
           <BlogList posts={group} location={location} />
           <PaginationController
             previousUrl={previousUrl}
@@ -49,6 +50,8 @@ export default function BlogListTemplate({ pageContext, location }) {
         item
         lg={2}
         md={3}
+        sm={0}
+        xs={0}
         display={{ xs: "none", sm: "none", md: "inline" }}
       >
         <SideBar tags={tags} location={location} />

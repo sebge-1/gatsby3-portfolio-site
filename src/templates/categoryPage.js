@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BlogList from "../components/BlogList";
-import { Stack, Grid, Box } from "@mui/material";
+import { Stack, Grid, Box, Container } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import getActiveTagfromPath from "../utils/getActiveTagfromPath";
@@ -32,9 +32,8 @@ export default function CategoryListTemplate({ pageContext, location }) {
         alignItems="center"
       >
         <Banner></Banner>
-
-        <h1>Read articles from {pageCount} pages </h1>
-        <Stack spacing={2}>
+        <Container sx={{ textAlign: "center" }}>
+          {/* <h1>Read articles from {pageCount} pages </h1> */}
           <Box
             display={{ xs: "block", sm: "block", md: "none" }}
             sx={{ marginBottom: "5rem" }}
@@ -46,6 +45,8 @@ export default function CategoryListTemplate({ pageContext, location }) {
               location={location}
             />
           </Box>
+        </Container>
+        <Stack spacing={2}>
           <BlogList
             posts={group}
             location={location}

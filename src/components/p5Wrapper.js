@@ -9,7 +9,12 @@ const P5Wrapper = () => {
       let shapes = [];
 
       p.setup = () => {
-        p.createCanvas(p.windowWidth, p.windowHeight).parent("canvasContainer");
+        let w;
+        let h;
+        p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
+        p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
+
+        p.createCanvas(w, h).parent("canvasContainer");
         p.background(153);
         const colorArray = [
           "#38295C",

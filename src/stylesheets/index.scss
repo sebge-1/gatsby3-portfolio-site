@@ -34,3 +34,19 @@
 .underline:hover::before {
   width: 100%;
 }
+
+#canvasContainer {
+  width: 100%;
+  height: 100vh;
+}
+
+#container {
+  position: relative;
+
+}
+
+#overlay {
+  position: absolute;
+  z-index: 2;
+  top:0;  
+}

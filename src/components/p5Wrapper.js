@@ -12,7 +12,7 @@ const P5Wrapper = () => {
         let w;
         let h;
         p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
-        p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
+        p.windowWidth === undefined ? (w = 10) : (w = p.windowWidth);
 
         p.createCanvas(w, h).parent("canvasContainer");
         p.background(153);

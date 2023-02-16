@@ -4,14 +4,11 @@ import Typewriter from "typewriter-effect";
 import React from "react";
 import { SEO } from "../components/SEO";
 import { Container, Grid, Typography, Stack } from "@mui/material";
-import P5Wrapper from "../components/p5Wrapper";
 
 export default class Home extends React.Component {
   render() {
     return (
       <div id="container">
-        <P5Wrapper />
-
         <Container
           sx={{
             height: "calc(100vh - 96px)",

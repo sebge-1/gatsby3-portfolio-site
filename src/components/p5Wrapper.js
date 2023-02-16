@@ -1,123 +1,117 @@
-import React, { useEffect, useRef } from "react";
-import p5 from "p5";
+import React from "react";
+import Sketch from "react-p5";
 
 const P5Wrapper = () => {
-  const sketchRef = useRef(null);
+  let shapes = [];
 
-  useEffect(() => {
-    const p = new p5((p) => {
-      let shapes = [];
-
-      p.setup = () => {
-        let w;
-        let h;
-        p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
-        p.windowWidth === undefined ? (w = 10) : (w = p.windowWidth);
-
-        p.createCanvas(w, h).parent("canvasContainer");
-        p.background(153);
-        const colorArray = [
-          "#38295C",
-          "#f48fb1",
-          "#5C6BC0",
-          "#3F51B5",
-          "#90caf9",
-          "#BBDEFB",
-          "#f48fb1",
-          "#1C4D5C",
-        ];
-
-        for (let i = 0; i < 35; i++) {
-          let x = p.random(p.width);
-          let y = p.random(p.height);
-          let size = p.random(5, 20);
-          let speedX = p.random(-1, 1);
-          let speedY = p.random(-1, 1);
-          let shapeType = p.floor(p.random(0, 3));
-          let color = colorArray[Math.floor(Math.random() * colorArray.length)];
-
-          switch (shapeType) {
-            case 0:
-              shapes.push(new Circle(x, y, size, speedX, speedY, color));
-              break;
-            case 1:
-              shapes.push(
-                new Rectangle(x, y, size, size, speedX, speedY, color)
-              );
-              break;
-            case 2:
-              shapes.push(new Triangle(x, y, size, speedX, speedY, color));
-              break;
-            default:
-              // shapes.push(new Flower(x, y, size, speedX, speedY, color));
-              break;
-          }
-        }
-      };
-
-      class Circle extends Shape {
-        constructor(x, y, size, speedX, speedY, color) {
-          super(x, y, speedX, speedY, color);
-          this.size = size;
-        }
-
-        draw() {
-          p.fill(this.color);
-          p.circle(this.x, this.y, this.size);
-        }
+  const setup = (p, canvasParentRef) => {
+    class Circle extends Shape {
+      constructor(p, x, y, size, speedX, speedY, color) {
+        super(p, x, y, speedX, speedY, color);
+        this.size = size;
       }
 
-      class Rectangle extends Shape {
-        constructor(x, y, width, height, speedX, speedY, color) {
-          super(x, y, speedX, speedY, color);
-          this.width = width;
-          this.height = height;
-        }
+      draw() {
+        p.fill(this.color);
+        p.circle(this.x, this.y, this.size);
+      }
+    }
 
-        draw() {
-          p.stroke(this.color);
-
-          p.fill(this.color);
-          p.rect(this.x, this.y, this.width, this.height);
-        }
+    class Rectangle extends Shape {
+      constructor(p, x, y, width, height, speedX, speedY, color) {
+        super(p, x, y, speedX, speedY, color);
+        this.width = width;
+        this.height = height;
       }
 
-      class Triangle extends Shape {
-        constructor(x, y, size, speedX, speedY, color) {
-          super(x, y, speedX, speedY, color);
-          this.size = size;
-        }
+      draw() {
+        p.stroke(this.color);
 
-        draw() {
-          p.stroke(this.color);
+        p.fill(this.color);
+        p.rect(this.x, this.y, this.width, this.height);
+      }
+    }
 
-          p.fill(this.color);
-          p.triangle(
-            this.x,
-            this.y,
-            this.x + this.size / 2,
-            this.y + this.size,
-            this.x - this.size / 2,
-            this.y + this.size
+    class Triangle extends Shape {
+      constructor(p, x, y, size, speedX, speedY, color) {
+        super(p, x, y, speedX, speedY, color);
+        this.size = size;
+      }
+
+      draw() {
+        p.stroke(this.color);
+
+        p.fill(this.color);
+        p.triangle(
+          this.x,
+          this.y,
+          this.x + this.size / 2,
+          this.y + this.size,
+          this.x - this.size / 2,
+          this.y + this.size
+        );
+      }
+    }
+    let w;
+    let h;
+    p.windowHeight === undefined ? (h = 10) : (h = p.windowHeight);
+    p.windowWidth === undefined ? (w = 10) : (w = p.windowWidth);
+
+    p.createCanvas(w, h).parent(canvasParentRef);
+    const colorArray = [
+      "#38295C",
+      "#f48fb1",
+      "#5C6BC0",
+      "#3F51B5",
+      "#90caf9",
+      "#BBDEFB",
+      "#f48fb1",
+      "#1C4D5C",
+    ];
+
+    for (let i = 0; i < 35; i++) {
+      let x = p.random(p.width);
+      let y = p.random(p.height);
+      let size = p.random(5, 20);
+      let speedX = p.random(-1, 1);
+      let speedY = p.random(-1, 1);
+      let shapeType = p.floor(p.random(0, 3));
+      let color = colorArray[Math.floor(Math.random() * colorArray.length)];
+
+      switch (shapeType) {
+        case 0:
+          shapes.push(new Circle(p, x, y, size, speedX, speedY, color));
+          break;
+        case 1:
+          shapes.push(
+            new Rectangle(p, x, y, size, size, speedX, speedY, color)
           );
-        }
+          break;
+        case 2:
+          shapes.push(new Triangle(p, x, y, size, speedX, speedY, color));
+          break;
+        default:
+          // shapes.push(new Flower(x, y, size, speedX, speedY, color));
+          break;
       }
+    }
+  };
 
-      p.draw = () => {
-        p.clear();
-        shapes.forEach((shape) => {
-          shape.update();
-          shape.draw();
-        });
-      };
-    }, sketchRef.current);
-  }, []);
-
-  return <div ref={sketchRef} id="canvasContainer" />;
+  const draw = (p) => {
+    p.clear();
+    shapes.forEach((shape) => {
+      shape.update();
+      shape.draw();
+    });
+  };
+  if (typeof window !== "undefined") {
+    return <Sketch setup={setup} draw={draw} />;
+  }
 };
 
 class Shape {
-  constructor(x, y, speedX, speedY, color) {
+  constructor(p, x, y, speedX, speedY, color) {
+    this.p = p;
     this.x = x;
     this.y = y;
     this.speedX = speedX;

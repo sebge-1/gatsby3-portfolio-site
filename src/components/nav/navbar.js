@@ -16,7 +16,7 @@ import {
   Fade,
   useScrollTrigger,
 } from "@mui/material";
-
+import { alpha } from "@mui/material/styles";
 import { Link } from "gatsby";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import ModeNightIcon from "@mui/icons-material/ModeNight";
@@ -29,6 +29,7 @@ import SocialLinks from "../SocialLinks";
 import { ThemeProvider } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
 import navBarLight from "../../themes/navBarLight";
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = 240;
 const navItems = [
@@ -37,6 +38,14 @@ const navItems = [
 ];
 
 export default function DrawerAppBar(props) {
+  const activeTheme = useTheme();
+  const navStyles = {
+    root: {
+      backgroundColor: alpha(`${activeTheme.palette.nav}`, 0.7), // Set the background color to be 90% opaque white
+      backdropFilter: "blur(6px)", // Add a blur effect to the background
+    },
+  };
+
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -138,7 +147,7 @@ export default function DrawerAppBar(props) {
     <>
       <HideOnScroll {...props}>
         <Box sx={{ display: "flex" }} id="back-to-top-anchor">
-          <AppBar component="nav">
+          <AppBar component="nav" sx={navStyles.root}>
             <Toolbar>
               <IconButton
                 color="inherit"

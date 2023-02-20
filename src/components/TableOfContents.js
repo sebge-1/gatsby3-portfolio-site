@@ -6,16 +6,21 @@ import {
   ListItemButton,
   ListItemText,
   Link,
+  Typography,
 } from "@mui/material";
 
-const TableOfContents = ({ sections, index }) => {
+const TableOfContents = ({ sections }) => {
   return (
     <List>
-      <h1>Contents</h1>
-
+      <Typography
+        variant="h4"
+        sx={{ fontFamily: "Montserrat", padding: "1rem 1rem 1rem 0" }}
+      >
+        Contents
+      </Typography>
       {sections &&
         sections.map((section, index) => (
-          <ListItem>
+          <ListItem key={index}>
             <Link href={`#${slugify(section)}`} key={index}>
               <ListItemText
                 className="underline"

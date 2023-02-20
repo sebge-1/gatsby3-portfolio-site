@@ -1,7 +1,7 @@
 import React from "react";
 import TagList from "./TagList";
 import TableOfContents from "./TableOfContents";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 const SideBar = (props) => {
   return (
@@ -17,7 +17,12 @@ const SideBar = (props) => {
       }}
     >
       {props.sections && <TableOfContents sections={props.sections} />}
-      <h1>All Tags</h1>
+      <Typography
+        variant="h4"
+        sx={{ fontFamily: "Montserrat", padding: "1rem 1rem 1rem 0" }}
+      >
+        All Tags
+      </Typography>
       <TagList
         tags={props.tags}
         location={props.location}

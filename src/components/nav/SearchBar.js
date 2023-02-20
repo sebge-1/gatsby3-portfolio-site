@@ -9,8 +9,17 @@ const filterOptions = createFilterOptions({
 });
 
 const SearchBar = ({ postData }) => {
+  const [id, setId] = React.useState(null);
+  React.useEffect(() => {
+    setId(`search-${Math.random().toString(36).substr(2, 9)}`);
+  }, []);
+
+  if (!id) {
+    return null;
+  }
   return (
     <Autocomplete
+      key="autocomplete-search"
       freeSolo
       sx={{
         width: 200,
@@ -33,6 +42,7 @@ const SearchBar = ({ postData }) => {
           }}
           InputLabelProps={{
             style: { color: "#fff" },
+            htmlFor: id,
           }}
         />
       )}

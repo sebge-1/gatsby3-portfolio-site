@@ -90,3 +90,19 @@
     transform: translate(0, 0);
   }
 }
+
+.typewriter {
+  border-right: 0.08em solid #333;
+  font-family: "merriweather";
+  padding-right: 0.25em;
+  padding-left: 0.25em;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink-caret 1.5s step-end infinite;
+  color: #F48FB1;
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: #333; }
+}

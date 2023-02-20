@@ -7,8 +7,11 @@ import getActiveTagfromPath from "../utils/getActiveTagfromPath";
 import { Divider } from "@mui/material";
 import TagList from "../components/TagList";
 import Banner from "../components/Banner";
+import { useTheme } from "@mui/material/styles";
 
 export default function CategoryListTemplate({ pageContext, location }) {
+  const activeTheme = useTheme();
+
   const { pageCount, group, index, slug: tag, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1
@@ -31,7 +34,10 @@ export default function CategoryListTemplate({ pageContext, location }) {
         justifyContent="center"
         alignItems="center"
       >
-        <Banner></Banner>
+        <Banner
+          text={"Blog"}
+          bgColor={`${activeTheme.palette.primary.main}`}
+        ></Banner>{" "}
         <Container sx={{ textAlign: "center" }}>
           {/* <h1>Read articles from {pageCount} pages </h1> */}
           <Box

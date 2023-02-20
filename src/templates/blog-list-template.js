@@ -5,8 +5,11 @@ import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import TagList from "../components/TagList";
 import Banner from "../components/Banner";
+import { useTheme } from "@mui/material/styles";
 
 export default function BlogListTemplate({ pageContext, location }) {
+  const activeTheme = useTheme();
+
   const { pageCount, group, index, tags, pathPrefix } = pageContext;
   const previousUrl =
     index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
@@ -15,6 +18,7 @@ export default function BlogListTemplate({ pageContext, location }) {
   return (
     <Grid container>
       <Grid
+        item
         lg={10}
         md={9}
         sm={12}
@@ -23,7 +27,10 @@ export default function BlogListTemplate({ pageContext, location }) {
         justifyContent="center"
         alignItems="center"
       >
-        <Banner></Banner>
+        <Banner
+          text={"Blog"}
+          bgColor={`${activeTheme.palette.primary.main}`}
+        ></Banner>
         <Container sx={{ textAlign: "center" }}>
           {/* <h1>Read articles from {pageCount} pages </h1> */}
           <Box

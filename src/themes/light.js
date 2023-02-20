@@ -12,5 +12,6 @@ module.exports = {
       default: "#FBFBFB",
       paper: "#FFFFFF",
     },
+    nav: "#3f51b5",
   },
 };

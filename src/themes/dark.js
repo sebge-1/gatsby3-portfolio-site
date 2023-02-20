@@ -12,5 +12,6 @@ module.exports = {
       default: "#212121",
       paper: "#100c08",
     },
+    nav: "#100C08",
   },
 };

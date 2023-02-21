@@ -22,22 +22,20 @@ const Typewriter = ({ strings, loop }) => {
         } else {
           if (deleteDelay > 0) {
             setDeleteDelay((prev) => prev - 100); // Decrease the delete delay
+          } else if (currentString.length > 0) {
+            setCurrentString((prev) => prev.slice(0, -1));
           } else {
-            if (currentString.length > 0) {
-              setCurrentString((prev) => prev.slice(0, -1));
-            } else {
-              setCurrentStringIndex((prev) =>
-                loop ? (prev + 1) % strings.length : prev
-              );
-              setTyping(true);
-              setDelay(500);
-              setDeleteDelay(350); // Reset the delete delay
-            }
+            setCurrentStringIndex((prev) =>
+              loop ? (prev + 1) % strings.length : prev
+            );
+            setTyping(true);
+            setDelay(500);
+            setDeleteDelay(350); // Reset the delete delay
           }
         }
       },
       typing ? 100 : deleteDelay * 0.75
-    ); // Use a faster interval time for deleting
+    );
 
     return () => clearInterval(intervalId);
   }, [
@@ -50,7 +48,37 @@ const Typewriter = ({ strings, loop }) => {
     deleteDelay,
   ]);
 
-  return <span className="typewriter">{currentString}</span>;
+  const invisibleText = strings.reduce((a, b) => (a.length > b.length ? a : b));
+  const invisibleTextLength = invisibleText.length;
+
+  return (
+    <span className="typewriter-container">
+      <span
+        className="typewriter"
+        style={{
+          display: "inline-block",
+          minWidth: `${invisibleTextLength}ch`,
+          position: "relative",
+        }}
+      >
+        <span className="typewriter-invisible" style={{ visibility: "hidden" }}>
+          {invisibleText}
+        </span>
+        <span
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            fontFamily: "merriweather",
+          }}
+        >
+          {currentString}
+        </span>
+      </span>
+    </span>
+  );
 };
 
 export default Typewriter;

@@ -52,30 +52,25 @@ const Typewriter = ({ strings, loop }) => {
   const invisibleTextLength = invisibleText.length;
 
   return (
-    <span className="typewriter-container">
+    <span
+      className="typewriter"
+      style={{
+        display: "inline-block",
+        minWidth: `${invisibleTextLength}ch`,
+        position: "relative",
+      }}
+    >
+      <span className="typewriter-invisible" style={{ visibility: "hidden" }}>
+        {invisibleText}
+      </span>
       <span
-        className="typewriter"
         style={{
-          display: "inline-block",
-          minWidth: `${invisibleTextLength}ch`,
-          position: "relative",
+          position: "absolute",
+          left: 0,
+          fontFamily: "merriweather",
         }}
       >
-        <span className="typewriter-invisible" style={{ visibility: "hidden" }}>
-          {invisibleText}
-        </span>
-        <span
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            width: "100%",
-            height: "100%",
-            fontFamily: "merriweather",
-          }}
-        >
-          {currentString}
-        </span>
+        {currentString}
       </span>
     </span>
   );

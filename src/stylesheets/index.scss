@@ -100,9 +100,17 @@
   overflow: hidden;
   animation: blink-caret 1.5s step-end infinite;
   color: #F48FB1;
+  vertical-align: middle;
 }
+
+
+
 
 @keyframes blink-caret {
   from, to { border-color: transparent; }
   50% { border-color: #333; }
+}
+
+.bold-text{
+  font-family: "Montserrat";
 }

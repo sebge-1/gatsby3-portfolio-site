@@ -35,9 +35,16 @@ function Home() {
         <Grid item xs={12} sm={9} md={9} lg={9} sx={{ padding: "5%" }}>
           <Typography
             sx={{
-              typography: { xs: "h2", sm: "h1" },
+              // typography: { xs: "h2", sm: "h1" },
+              fontSize: {
+                lg: 80,
+                md: 80,
+                sm: 60,
+                xs: 60,
+              },
             }}
-            className="bold-text"
+            fontFamily="Montserrat"
+            variant="h1"
           >
             Hello there!
           </Typography>
@@ -64,7 +71,7 @@ function Home() {
             fontWeight="bold"
             fontFamily="merriweather"
             align="left"
-            verticalAlign="middle"
+            // verticalAlign="middle"
           >
             This is my digital home. Have fun looking around! You can find more
             about me{" "}

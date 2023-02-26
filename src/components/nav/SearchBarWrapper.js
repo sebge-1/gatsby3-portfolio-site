@@ -33,8 +33,8 @@ const SearchBarWrapper = ({ postData }) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search Posts"
-          placeholder="Hello"
+          label="Search"
+          placeholder="Python"
           InputProps={{
             ...params.InputProps,
             type: "search",

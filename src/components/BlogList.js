@@ -89,12 +89,21 @@ const BlogList = (props) => {
                     edge.node.tag.map((tag, index) => {
                       const slug = slugify(tag);
                       return (
-                        <Link to={`/blog/tags/${slug}`} key={index}>
+                        <Link
+                          to={
+                            slug === props.activeTag
+                              ? `/blog`
+                              : `/blog/tags/${slug}`
+                          }
+                          key={index}
+                        >
                           <Chip
                             key={index}
                             label={tag}
                             clickable
-                            onClick={() => props.setActiveTag(slug)}
+                            onClick={() =>
+                              props.setActiveTag && props.setActiveTag(slug)
+                            }
                             sx={{
                               bgcolor:
                                 props.activeTag && props.activeTag === slug

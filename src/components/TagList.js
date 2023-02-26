@@ -12,7 +12,14 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
     <div style={{ marginBottom: "2rem" }}>
       {tags.map((tag, index) => (
         <Badge badgeContent={tag.postCount} color="secondary" key={index}>
-          <Link key={index} to={`/blog/tags/${slugify(tag.tagName)}`}>
+          <Link
+            key={index}
+            to={
+              slugify(tag.tagName) === activeTag
+                ? `/blog`
+                : `/blog/tags/${slugify(tag.tagName)}`
+            }
+          >
             <Chip
               key={index}
               label={tag.tagName}
@@ -36,7 +43,13 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
                 },
                 m: "2.5px",
               }}
-              onClick={() => setActiveTag && setActiveTag(tag.tagName)}
+              onClick={() => {
+                if (slugify(tag.tagName) === activeTag) {
+                  setActiveTag("");
+                } else {
+                  setActiveTag && setActiveTag(slugify(tag.tagName));
+                }
+              }}
             />
           </Link>
         </Badge>

@@ -24,7 +24,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import ScrollTop from "../ScrollTop";
 import Modal from "./Modal.js";
-import SearchBar from "./SearchBar";
 import SocialLinks from "../SocialLinks";
 import { ThemeProvider } from "@mui/material";
 import { StaticImage } from "gatsby-plugin-image";
@@ -41,8 +40,7 @@ export default function DrawerAppBar(props) {
   const activeTheme = useTheme();
   const navStyles = {
     root: {
-      backgroundColor: alpha(`${activeTheme.palette.nav}`, 0.7), // Set the background color to be 90% opaque white
-      backdropFilter: "blur(6px)", // Add a blur effect to the background
+      height: "81px",
     },
   };
 
@@ -146,19 +144,31 @@ export default function DrawerAppBar(props) {
   return (
     <>
       <HideOnScroll {...props}>
-        <Box sx={{ display: "flex" }} id="back-to-top-anchor">
+        <Box sx={{ display: "flex" }}>
           <AppBar component="nav" sx={navStyles.root}>
-            <Toolbar>
+            <Toolbar
+              sx={{
+                alignItems: "center",
+                height: "77px",
+              }}
+            >
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
-                sx={{ mr: 2, display: { md: "none" } }}
+                sx={{
+                  mr: 2,
+                  display: { md: "none" },
+                }}
               >
                 <MenuIcon />
               </IconButton>
-              <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+              <Box
+                sx={{
+                  display: { xs: "none", sm: "none", md: "inline-block" },
+                }}
+              >
                 <StaticImage
                   src="../../images/avatar.jpeg"
                   style={{
@@ -166,6 +176,7 @@ export default function DrawerAppBar(props) {
                     width: "50px",
                     height: "50px",
                     marginRight: "1rem",
+                    verticalAlign: "middle",
                   }}
                   alt="Seb Gertz"
                 />
@@ -180,10 +191,10 @@ export default function DrawerAppBar(props) {
               >
                 Sebastian Gertz
               </Typography>
-              <ThemeProvider theme={navBarLight}>
-                <SearchBar postData={props.postData} />
-              </ThemeProvider>
-              <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}>
+              <ThemeProvider theme={navBarLight}></ThemeProvider>
+              <Box sx={{ flexGrow: 1 }}></Box>
+
+              <Box sx={{ display: { xs: "none", sm: "inline-block" } }}>
                 {navItems.map((item) => (
                   <Link to={item.slug} key={item.slug}>
                     <Button
@@ -196,11 +207,10 @@ export default function DrawerAppBar(props) {
                   </Link>
                 ))}
               </Box>
-              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              <Box>
                 <Button
                   sx={{
                     display: "inline-block",
-
                     color: "#fff",
                     border: "2px solid #F48FB1",
                     ":hover": {

@@ -2,8 +2,24 @@ import React from "react";
 import TagList from "./TagList";
 import TableOfContents from "./TableOfContents";
 import { Container, Typography } from "@mui/material";
+import SearchBarWrapper from "./nav/SearchBarWrapper";
+import { useStaticQuery, graphql, Link } from "gatsby";
 
 const SideBar = (props) => {
+  const postData = useStaticQuery(
+    graphql`
+      {
+        allContentfulBlogPost(sort: { publishedDate: DESC }) {
+          edges {
+            node {
+              title
+              slug
+            }
+          }
+        }
+      }
+    `
+  );
   return (
     <Container
       sx={{
@@ -30,6 +46,7 @@ const SideBar = (props) => {
         activeTag={props.activeTag}
         tag={props.tag}
       />
+      <SearchBarWrapper postData={postData} />
     </Container>
   );
 };

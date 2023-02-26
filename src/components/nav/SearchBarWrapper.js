@@ -1,47 +1,45 @@
-import * as React from "react";
-import { Autocomplete, Divider, TextField } from "@mui/material";
+import React from "react";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 import { createFilterOptions } from "@mui/material/Autocomplete";
 import { Link } from "gatsby";
+import { Divider } from "@mui/material";
 
 const filterOptions = createFilterOptions({
   matchFrom: "any",
   stringify: (option) => option.title,
 });
 
-const SearchBar = ({ postData }) => {
+const SearchBarWrapper = ({ postData }) => {
   const [id, setId] = React.useState(null);
-  React.useEffect(() => {
+
+  React.useLayoutEffect(() => {
     setId(`search-${Math.random().toString(36).substr(2, 9)}`);
   }, []);
 
   if (!id) {
     return null;
   }
+
   return (
     <Autocomplete
       key="autocomplete-search"
-      freeSolo
       sx={{
-        width: 200,
-        marginLeft: "auto",
-        mr: "1rem",
-        paddingTop: "10px",
-        paddingBottom: "10px",
+        marginTop: "2rem",
+        marginBottom: "2rem",
       }}
-      disableClearable
       options={postData.allContentfulBlogPost.edges.map((edge) => edge.node)}
       getOptionLabel={(option) => option.title}
       renderInput={(params) => (
         <TextField
           {...params}
           label="Search Posts"
-          sx={{ input: { color: "#fff" } }}
+          placeholder="Hello"
           InputProps={{
             ...params.InputProps,
             type: "search",
           }}
           InputLabelProps={{
-            style: { color: "#fff" },
             htmlFor: id,
           }}
         />
@@ -60,4 +58,4 @@ const SearchBar = ({ postData }) => {
   );
 };
 
-export default SearchBar;
+export default SearchBarWrapper;

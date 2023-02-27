@@ -12,6 +12,7 @@ import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import { Divider, Typography } from "@mui/material";
 import TableOfContents from "../components/TableOfContents";
+import { SEO } from "../components/SEO";
 
 const BlogPost = (props) => {
   const { tags, posts, index, pathPrefix, post } = props.pageContext;
@@ -46,93 +47,100 @@ const BlogPost = (props) => {
       : "";
 
   return (
-    <Grid container>
-      <Grid
-        item
-        lg={9}
-        md={9}
-        sm={12}
-        xs={12}
-        sx={{
-          paddingRight: "10%",
-          paddingLeft: "10%",
-        }}
-      >
-        <Container sx={{ marginTop: "2rem" }}>
-          <Typography variant="overline" color="text.secondary" component="div">
-            {publishedDate}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h3"
-            sx={{ fontSize: { xs: "2rem", sm: "3rem" } }}
-          >
-            {title}
-          </Typography>
-          <Box>
-            {tag &&
-              tag.map((tag, index) => {
-                const slug = slugify(tag);
-                return (
-                  <Link to={`/blog/tags/${slug}`} key={index}>
-                    <Chip
-                      key={index}
-                      label={tag}
-                      clickable
-                      sx={{
-                        m: "0 0.1rem 1rem 0.1rem",
-                      }}
-                    />
-                  </Link>
-                );
-              })}
-          </Box>
-          {tldr.internal.content && (
-            <Typography gutterBottom variant="h6" component="div">
-              {tldr.internal.content}
+    <>
+      <SEO title={title} />
+      <Grid container>
+        <Grid
+          item
+          lg={9}
+          md={9}
+          sm={12}
+          xs={12}
+          sx={{
+            paddingRight: "10%",
+            paddingLeft: "10%",
+          }}
+        >
+          <Container sx={{ marginTop: "2rem" }}>
+            <Typography
+              variant="overline"
+              color="text.secondary"
+              component="div"
+            >
+              {publishedDate}
             </Typography>
-          )}
-          <InfoBar date={publishedDate} content={content} />
+            <Typography
+              gutterBottom
+              variant="h3"
+              sx={{ fontSize: { xs: "2rem", sm: "3rem" } }}
+            >
+              {title}
+            </Typography>
+            <Box>
+              {tag &&
+                tag.map((tag, index) => {
+                  const slug = slugify(tag);
+                  return (
+                    <Link to={`/blog/tags/${slug}`} key={index}>
+                      <Chip
+                        key={index}
+                        label={tag}
+                        clickable
+                        sx={{
+                          m: "0 0.1rem 1rem 0.1rem",
+                        }}
+                      />
+                    </Link>
+                  );
+                })}
+            </Box>
+            {tldr.internal.content && (
+              <Typography gutterBottom variant="h6" component="div">
+                {tldr.internal.content}
+              </Typography>
+            )}
+            <InfoBar date={publishedDate} content={content} />
 
-          {heroImage && (
-            <GatsbyImage
-              image={image}
-              style={{ height: "auto" }}
-              alt={description || ""}
+            {heroImage && (
+              <GatsbyImage
+                image={image}
+                style={{ height: "auto" }}
+                alt={description || ""}
+              />
+            )}
+
+            <Box display={{ sm: "inline-block", md: "none" }}>
+              <TableOfContents sections={section} />
+            </Box>
+            <Box>{post && renderRichText(content, options)}</Box>
+            <PaginationController
+              index={index + 1}
+              nextUrl={nextUrl}
+              previousUrl={previousUrl}
+              pathPrefix={pathPrefix}
+              skipPagination={true}
+              pageCount={posts.length}
             />
-          )}
-
-          <Box display={{ sm: "inline-block", md: "none" }}>
-            <TableOfContents sections={section} />
-          </Box>
-          <Box>{post && renderRichText(content, options)}</Box>
-          <PaginationController
-            index={index + 1}
-            nextUrl={nextUrl}
-            previousUrl={previousUrl}
-            pathPrefix={pathPrefix}
-            skipPagination={true}
-            pageCount={posts.length}
-          />
-        </Container>
+          </Container>
+        </Grid>
+        <Box
+          display={{ sm: "none", md: "block" }}
+          component={Divider}
+          orientation="vertical"
+          flexItem
+          sx={{ mr: "-1px" }}
+        />
+        <Box
+          component={Grid}
+          item
+          lg={3}
+          md={3}
+          display={{ xs: "none", sm: "none", md: "block" }}
+        >
+          <SideBar sections={section} tags={tags} location={props.location} />
+        </Box>
       </Grid>
-      <Box
-        display={{ sm: "none", md: "block" }}
-        component={Divider}
-        orientation="vertical"
-        flexItem
-        sx={{ mr: "-1px" }}
-      />
-      <Box
-        component={Grid}
-        item
-        lg={3}
-        md={3}
-        display={{ xs: "none", sm: "none", md: "block" }}
-      >
-        <SideBar sections={section} tags={tags} location={props.location} />
-      </Box>
-    </Grid>
+    </>
   );
 };
 

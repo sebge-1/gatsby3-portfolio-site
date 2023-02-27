@@ -8,6 +8,7 @@ import { Divider } from "@mui/material";
 import TagList from "../components/TagList";
 import Banner from "../components/Banner";
 import { useTheme } from "@mui/material/styles";
+import { SEO } from "../components/SEO";
 
 export default function CategoryListTemplate({ pageContext, location }) {
   const activeTheme = useTheme();
@@ -23,69 +24,72 @@ export default function CategoryListTemplate({ pageContext, location }) {
   const [activeTag, setActiveTag] = useState(currentlyActive);
 
   return (
-    <Grid container divider={<Divider orientation="vertical" />}>
-      <Grid
-        item
-        lg={10}
-        md={9}
-        sm={12}
-        xs={12}
-        container
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Banner
-          text={"Blog"}
-          bgColor={`${activeTheme.palette.primary.main}`}
-        ></Banner>{" "}
-        <Container sx={{ textAlign: "center" }}>
-          {/* <h1>Read articles from {pageCount} pages </h1> */}
-          <Box
-            display={{ xs: "block", sm: "block", md: "none" }}
-            sx={{ marginBottom: "5rem" }}
-          >
-            <TagList
-              tags={tags}
-              activeTag={activeTag}
-              setActiveTag={setActiveTag}
+    <>
+      <SEO title={`Blog page with topic: ${tag}`} />;
+      <Grid container divider={<Divider orientation="vertical" />}>
+        <Grid
+          item
+          lg={10}
+          md={9}
+          sm={12}
+          xs={12}
+          container
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Banner
+            text={"Blog"}
+            bgColor={`${activeTheme.palette.primary.main}`}
+          ></Banner>{" "}
+          <Container sx={{ textAlign: "center" }}>
+            {/* <h1>Read articles from {pageCount} pages </h1> */}
+            <Box
+              display={{ xs: "block", sm: "block", md: "none" }}
+              sx={{ marginBottom: "5rem" }}
+            >
+              <TagList
+                tags={tags}
+                activeTag={activeTag}
+                setActiveTag={setActiveTag}
+                location={location}
+              />
+            </Box>
+          </Container>
+          <Stack spacing={2}>
+            <BlogList
+              posts={group}
               location={location}
+              tags={tags}
+              setActiveTag={setActiveTag}
+              activeTag={activeTag}
             />
-          </Box>
-        </Container>
-        <Stack spacing={2}>
-          <BlogList
-            posts={group}
-            location={location}
+            <PaginationController
+              tag={tag}
+              previousUrl={previousUrl}
+              nextUrl={nextUrl}
+              pageCount={pageCount}
+              pathPrefix={pathPrefix}
+              index={index}
+            />
+          </Stack>
+        </Grid>
+        <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
+        <Box
+          component={Grid}
+          item
+          lg={2}
+          md={3}
+          display={{ xs: "none", sm: "none", md: "inline" }}
+        >
+          <SideBar
             tags={tags}
+            tag={tag}
+            location={location}
             setActiveTag={setActiveTag}
             activeTag={activeTag}
           />
-          <PaginationController
-            tag={tag}
-            previousUrl={previousUrl}
-            nextUrl={nextUrl}
-            pageCount={pageCount}
-            pathPrefix={pathPrefix}
-            index={index}
-          />
-        </Stack>
+        </Box>
       </Grid>
-      <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} />
-      <Box
-        component={Grid}
-        item
-        lg={2}
-        md={3}
-        display={{ xs: "none", sm: "none", md: "inline" }}
-      >
-        <SideBar
-          tags={tags}
-          tag={tag}
-          location={location}
-          setActiveTag={setActiveTag}
-          activeTag={activeTag}
-        />
-      </Box>
-    </Grid>
+    </>
   );
 }

@@ -6,6 +6,7 @@ import PaginationController from "../components/PaginationController";
 import TagList from "../components/TagList";
 import Banner from "../components/Banner";
 import { useTheme } from "@mui/material/styles";
+import { SEO } from "../components/SEO";
 
 export default function BlogListTemplate({ pageContext, location }) {
   const activeTheme = useTheme();
@@ -66,3 +67,5 @@ export default function BlogListTemplate({ pageContext, location }) {
     </Grid>
   );
 }
+
+export const Head = () => <SEO title="Blog" />;

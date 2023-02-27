@@ -7,15 +7,17 @@ import TagList from "../components/TagList";
 import Banner from "../components/Banner";
 import { useTheme } from "@mui/material/styles";
 import { SEO } from "../components/SEO";
+import SearchBarWrapper from "../components/nav/SearchBarWrapper";
 
 export default function BlogListTemplate({ pageContext, location }) {
   const activeTheme = useTheme();
 
-  const { pageCount, group, index, tags, pathPrefix } = pageContext;
+  const { pageCount, group, index, tags, pathPrefix, postData } = pageContext;
   const previousUrl =
     index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
   const nextUrl = `/blog/${(index + 1).toString()}`;
 
+  console.log(postData);
   return (
     <Grid container>
       <Grid
@@ -32,13 +34,19 @@ export default function BlogListTemplate({ pageContext, location }) {
           text={"Blog"}
           bgColor={`${activeTheme.palette.primary.main}`}
         ></Banner>
-        <Container sx={{ textAlign: "center" }}>
-          {/* <h1>Read articles from {pageCount} pages </h1> */}
+        <Container
+          sx={{
+            textAlign: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
           <Box
-            display={{ xs: "block", sm: "block", md: "none" }}
-            sx={{ marginBottom: "2rem" }}
+            display={{ sm: "inline-block", md: "none" }}
+            sx={{ width: "80%" }}
           >
             <TagList tags={tags} />
+            <SearchBarWrapper postData={postData} />
           </Box>
         </Container>
         <Stack spacing={2}>

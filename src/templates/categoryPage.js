@@ -9,11 +9,20 @@ import TagList from "../components/TagList";
 import Banner from "../components/Banner";
 import { useTheme } from "@mui/material/styles";
 import { SEO } from "../components/SEO";
+import SearchBarWrapper from "../components/nav/SearchBarWrapper";
 
 export default function CategoryListTemplate({ pageContext, location }) {
   const activeTheme = useTheme();
 
-  const { pageCount, group, index, slug: tag, tags, pathPrefix } = pageContext;
+  const {
+    pageCount,
+    group,
+    index,
+    slug: tag,
+    tags,
+    pathPrefix,
+    postData,
+  } = pageContext;
   const previousUrl =
     index - 1 === 1
       ? `/blog/tags/${tag}`
@@ -25,8 +34,9 @@ export default function CategoryListTemplate({ pageContext, location }) {
 
   return (
     <>
-      <SEO title={`Blog page with topic: ${tag}`} />;
-      <Grid container divider={<Divider orientation="vertical" />}>
+      <SEO title={`Blog page with topic: ${tag}`} />
+
+      <Grid container>
         <Grid
           item
           lg={10}
@@ -40,12 +50,11 @@ export default function CategoryListTemplate({ pageContext, location }) {
           <Banner
             text={"Blog"}
             bgColor={`${activeTheme.palette.primary.main}`}
-          ></Banner>{" "}
+          ></Banner>
           <Container sx={{ textAlign: "center" }}>
-            {/* <h1>Read articles from {pageCount} pages </h1> */}
             <Box
-              display={{ xs: "block", sm: "block", md: "none" }}
-              sx={{ marginBottom: "5rem" }}
+              display={{ xs: "inline-block", sm: "inline-block", md: "none" }}
+              sx={{ width: "80%" }}
             >
               <TagList
                 tags={tags}
@@ -53,6 +62,7 @@ export default function CategoryListTemplate({ pageContext, location }) {
                 setActiveTag={setActiveTag}
                 location={location}
               />
+              <SearchBarWrapper postData={postData} />
             </Box>
           </Container>
           <Stack spacing={2}>

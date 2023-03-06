@@ -126,7 +126,12 @@ export default function DrawerAppBar(props) {
       <List>
         {navItems.map((item, index) => (
           <ListItem key={item.slug} disablePadding>
-            <Link to={item.slug} key={index}>
+            <Link
+              to={item.slug}
+              key={index}
+              activeClassName="active-link"
+              partiallyActive={item.slug.includes("/blog")}
+            >
               <ListItemButton className="underline">
                 <ListItemText primary={item.displayName} />
               </ListItemButton>
@@ -196,7 +201,12 @@ export default function DrawerAppBar(props) {
 
               <Box sx={{ display: { xs: "none", sm: "inline-block" } }}>
                 {navItems.map((item) => (
-                  <Link to={item.slug} key={item.slug}>
+                  <Link
+                    to={item.slug}
+                    key={item.slug}
+                    activeClassName="active-link"
+                    partiallyActive={item.slug.includes("/blog")}
+                  >
                     <Button
                       key={item.slug}
                       sx={{ color: "#fff", ml: "1rem", mr: "1rem" }}

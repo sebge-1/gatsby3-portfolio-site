@@ -35,7 +35,9 @@ module.exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  const posts = res.data.allContentfulBlogPost.edges;
+  const postData = res.data;
+  const posts = postData.allContentfulBlogPost.edges;
+
   const tagList = new Set();
   posts.forEach((post) => {
     post.node.tag.forEach((tag) => tagList.add(tag));
@@ -72,7 +74,12 @@ module.exports.createPages = async ({ graphql, actions }) => {
       pageTemplate: categoryTemplate,
       pageLength: 6,
       pathPrefix: `${prefix}/${slug}`,
-      context: { slug, tags: [...tags], pathPrefix: `${prefix}/${slug}` },
+      context: {
+        postData: postData,
+        slug,
+        tags: [...tags],
+        pathPrefix: `${prefix}/${slug}`,
+      },
     });
   });
   // 3. Create Blog List Pages
@@ -82,6 +89,6 @@ module.exports.createPages = async ({ graphql, actions }) => {
     pageTemplate: "src/templates/blog-list-template.js",
     pageLength: 6,
     pathPrefix: "blog",
-    context: { tags: [...tags], pathPrefix: "blog" },
+    context: { postData: postData, tags: [...tags], pathPrefix: "blog" },
   });
 };

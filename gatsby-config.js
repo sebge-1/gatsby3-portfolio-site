@@ -2,12 +2,12 @@
  * @type {import('gatsby').GatsbyConfig}
  */
 
-// const fs = require("fs");
-// const dotenv = require("dotenv");
-// const envConfig = dotenv.parse(fs.readFileSync(".env"));
-// for (var k in envConfig) {
-//   process.env[k] = envConfig[k];
-// }
+const fs = require("fs");
+const dotenv = require("dotenv");
+const envConfig = dotenv.parse(fs.readFileSync(".env"));
+for (var k in envConfig) {
+  process.env[k] = envConfig[k];
+}
 
 module.exports = {
   siteMetadata: {
@@ -15,6 +15,9 @@ module.exports = {
     siteUrl: `https://www.sebastiangertz.com`,
     description: "Personal blog and portfolio site",
     image: "👨🏻‍💻",
+  },
+  flags: {
+    DEV_SSR: true,
   },
   plugins: [
     {
@@ -29,13 +32,20 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     "gatsby-plugin-sass",
+    "gatsby-plugin-sitemap",
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: "G-VWSTSMGH7S",
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          "G-VWSTSMGH7S", // Google Analytics / GA
+        ],
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          head: true,
+        },
       },
     },
-    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-plugin-manifest",
       options: {

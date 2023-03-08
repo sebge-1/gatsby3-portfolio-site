@@ -34,19 +34,6 @@ module.exports = {
     "gatsby-plugin-sass",
     "gatsby-plugin-sitemap",
     {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        // You can add multiple tracking ids and a pageview event will be fired for all of them.
-        trackingIds: [
-          "G-VWSTSMGH7S", // Google Analytics / GA
-        ],
-        // This object is used for configuration specific to this plugin
-        pluginConfig: {
-          head: true,
-        },
-      },
-    },
-    {
       resolve: "gatsby-plugin-manifest",
       options: {
         icon: "src/images/icon.png",

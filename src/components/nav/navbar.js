@@ -149,7 +149,7 @@ export default function DrawerAppBar(props) {
   return (
     <>
       <HideOnScroll {...props}>
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex" }} id={"back-to-top-anchor"}>
           <AppBar component="nav" sx={navStyles.root}>
             <Toolbar
               sx={{

@@ -6,7 +6,7 @@ import PaginationController from "../components/PaginationController";
 import getActiveTagfromPath from "../utils/getActiveTagfromPath";
 import { Divider } from "@mui/material";
 import TagList from "../components/TagList";
-import Banner from "../components/Banner";
+import PageHeader from "../components/PageHeader";
 import { useTheme } from "@mui/material/styles";
 import { SEO } from "../components/SEO";
 import SearchBarWrapper from "../components/nav/SearchBarWrapper";
@@ -47,10 +47,10 @@ export default function CategoryListTemplate({ pageContext, location }) {
           justifyContent="center"
           alignItems="center"
         >
-          <Banner
+          <PageHeader
             text={"Blog"}
             bgColor={`${activeTheme.palette.primary.main}`}
-          ></Banner>
+          ></PageHeader>
           <Container sx={{ textAlign: "center" }}>
             <Box
               display={{ xs: "inline-block", sm: "inline-block", md: "none" }}

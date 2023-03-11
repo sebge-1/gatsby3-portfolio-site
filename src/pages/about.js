@@ -1,7 +1,7 @@
 import React from "react";
 import BlogList from "../components/BlogList";
 import { Stack, Grid, Divider, Box, Container } from "@mui/material";
-import Banner from "../components/Banner";
+import PageHeader from "../components/PageHeader";
 
 export default function About() {
   return (
@@ -14,7 +14,7 @@ export default function About() {
         justifyContent="center"
         alignItems="center"
       >
-        <Banner text={"Coming soon"} bgColor={"#f48fb1"}></Banner>
+        <PageHeader text={"Coming soon"} bgColor={"#f48fb1"}></PageHeader>
       </Grid>
       {/* <Divider orientation="vertical" flexItem sx={{ mr: "-1px" }} /> */}
     </Grid>

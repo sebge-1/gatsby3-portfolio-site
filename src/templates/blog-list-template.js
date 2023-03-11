@@ -4,7 +4,7 @@ import { Stack, Grid, Divider, Box, Container } from "@mui/material";
 import SideBar from "../components/SideBar";
 import PaginationController from "../components/PaginationController";
 import TagList from "../components/TagList";
-import Banner from "../components/Banner";
+import PageHeader from "../components/PageHeader";
 import { useTheme } from "@mui/material/styles";
 import { SEO } from "../components/SEO";
 import SearchBarWrapper from "../components/nav/SearchBarWrapper";
@@ -17,7 +17,6 @@ export default function BlogListTemplate({ pageContext, location }) {
     index - 1 === 1 ? "/blog" : `/blog/${(index - 1).toString()}`;
   const nextUrl = `/blog/${(index + 1).toString()}`;
 
-  console.log(postData);
   return (
     <Grid container>
       <Grid
@@ -30,10 +29,10 @@ export default function BlogListTemplate({ pageContext, location }) {
         justifyContent="center"
         alignItems="center"
       >
-        <Banner
+        <PageHeader
           text={"Blog"}
           bgColor={`${activeTheme.palette.primary.main}`}
-        ></Banner>
+        ></PageHeader>
         <Container
           sx={{
             textAlign: "center",

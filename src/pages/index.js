@@ -26,7 +26,7 @@ function Home() {
           sx={{
             padding: "5%",
             alignSelf: "center",
-            maxWidth: "900px",
+            maxWidth: "700px",
             borderRadius: "1%",
             boxShadow: "0 8px 18px rgba(144, 202, 249, 0.6)",
             textAlign: "center",
@@ -37,7 +37,6 @@ function Home() {
           <Grid item xs={12} sm={9} md={9} lg={9} sx={{ padding: "5%" }}>
             <Typography
               sx={{
-                // typography: { xs: "h2", sm: "h1" },
                 fontSize: {
                   lg: 80,
                   md: 80,
@@ -53,7 +52,14 @@ function Home() {
 
             <Typography
               className="wave"
-              sx={{ typography: { xs: "h2", sm: "h1" } }}
+              sx={{
+                fontSize: {
+                  lg: 80,
+                  md: 80,
+                  sm: 60,
+                  xs: 60,
+                },
+              }}
             >
               👋🏻
             </Typography>

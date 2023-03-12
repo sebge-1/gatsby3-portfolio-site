@@ -23,7 +23,7 @@ const SocialLinks = ({ spacing, size }) => {
         </Link>
       </Grid>
       <Grid item>
-        <Link component={IconButton} href="mailto: me@email.com">
+        <Link component={IconButton} href="mailto: sebgertz.tvv31@slmail.me">
           <EmailIcon fontSize={size} />
         </Link>
       </Grid>

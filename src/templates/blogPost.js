@@ -13,6 +13,8 @@ import PaginationController from "../components/PaginationController";
 import { Divider, Typography } from "@mui/material";
 import TableOfContents from "../components/TableOfContents";
 import { SEO } from "../components/SEO";
+import DiscussionEmbed from "../components/Disqus";
+import SocialBar from "../components/SocialBar";
 
 const BlogPost = (props) => {
   const { tags, posts, index, pathPrefix, post } = props.pageContext;
@@ -121,6 +123,9 @@ const BlogPost = (props) => {
               skipPagination={true}
               pageCount={posts.length}
             />
+            <Box sx={{ mt: "2rem" }}>
+              <DiscussionEmbed slug={post.node.slug} title={title} />
+            </Box>
           </Container>
         </Grid>
         <Box
@@ -140,6 +145,7 @@ const BlogPost = (props) => {
           <SideBar sections={section} tags={tags} location={props.location} />
         </Box>
       </Grid>
+      <SocialBar url={props.location.href} />
     </>
   );
 };

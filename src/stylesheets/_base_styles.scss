@@ -16,3 +16,19 @@ a:link {    /* unvisited link */
 
 #disqus_thread { color-scheme: none; }
 
+// SOCIAL BAR
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin-bottom: 45px;
+}
+
+.icon {
+  margin-bottom: 25px;
+}
+.share-button:hover .icon circle {
+  filter: brightness(1.2);
+}

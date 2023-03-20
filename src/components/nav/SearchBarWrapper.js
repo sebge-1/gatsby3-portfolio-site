@@ -26,7 +26,7 @@ const SearchBarWrapper = ({ postData }) => {
       key="autocomplete-search"
       sx={{
         margin: "2rem auto",
-        maxWidth: "300px",
+        maxWidth: "250px",
       }}
       options={postData.allContentfulBlogPost.edges.map((edge) => edge.node)}
       getOptionLabel={(option) => option.title}

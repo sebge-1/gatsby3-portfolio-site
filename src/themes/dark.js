@@ -10,7 +10,7 @@ module.exports = {
     },
     background: {
       default: "#212121",
-      paper: "#100c08",
+      paper: "#1e1e1e",
     },
     nav: "#100C08",
   },

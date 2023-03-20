@@ -16,7 +16,7 @@ import {
 
 const SocialBar = (props) => {
   return (
-    <Stack className="icon-bar" sx={{ paddingLeft: "0.5rem" }}>
+    <Stack className="icon-bar" sx={{ paddingLeft: "0.25rem" }}>
       <LinkedinShareButton url={props.url} className="share-button">
         <LinkedinIcon size="48" round={true} className="icon" />
       </LinkedinShareButton>

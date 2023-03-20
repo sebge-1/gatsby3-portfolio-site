@@ -39,8 +39,8 @@ export default function CategoryListTemplate({ pageContext, location }) {
       <Grid container>
         <Grid
           item
-          lg={10}
-          md={9}
+          lg={9}
+          md={8}
           sm={12}
           xs={12}
           container
@@ -87,9 +87,9 @@ export default function CategoryListTemplate({ pageContext, location }) {
         <Box
           component={Grid}
           item
-          lg={2}
-          md={3}
-          display={{ xs: "none", sm: "none", md: "inline" }}
+          lg={3}
+          md={4}
+          display={{ xs: "none", sm: "none", md: "block" }}
         >
           <SideBar
             tags={tags}

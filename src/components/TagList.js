@@ -1,6 +1,7 @@
 import * as React from "react";
 import Badge from "@mui/material/Badge";
 import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
 import { Link } from "gatsby";
 import { slugify } from "../utils/slugify";
 import { useTheme } from "@mui/material/styles";
@@ -9,7 +10,11 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
   const activeTheme = useTheme();
 
   return (
-    <div style={{ marginBottom: "2rem" }}>
+    <Paper
+      sx={{ margin: "2rem 0.5rem", padding: "1rem" }}
+      outlined={true}
+      elevation={4}
+    >
       {tags.map((tag, index) => (
         <Badge badgeContent={tag.postCount} color="secondary" key={index}>
           <Link
@@ -54,6 +59,6 @@ export default function TagList({ activeTag, setActiveTag, tags }) {
           </Link>
         </Badge>
       ))}
-    </div>
+    </Paper>
   );
 }
